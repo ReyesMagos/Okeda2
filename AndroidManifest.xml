@@ -46,6 +46,10 @@
             android:name="com.example.usuario.tryww.BusquedaViviendas"
             android:label="@string/title_activity_busqueda_viviendas" >
         </activity>
+        <activity
+            android:name="co.gov.fna.okeda.presentacion.actividades.MostrarVivienda"
+            android:label="@string/title_activity_mostrar_vivienda" >
+        </activity>
     </application>
 
 </manifest>

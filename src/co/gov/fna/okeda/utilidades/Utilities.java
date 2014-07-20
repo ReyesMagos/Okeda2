@@ -63,11 +63,14 @@ import android.widget.TextView;
 	public List<String> getDepartments(List<Entidades> listaEntidades) {
 		// TODO Auto-generated method stub
 		List<String> listaDepartamentos = new ArrayList<String>();
+	
 		for(Entidades e:listaEntidades){
 			if(!isElementOnList(e.getDepartamento(), listaDepartamentos)){
 				listaDepartamentos.add(e.getDepartamento());
 			}
 		}
+		java.util.Collections.sort(listaDepartamentos);
+		listaDepartamentos.add(0, "Seleccione");
 		return listaDepartamentos;
 	}
 
@@ -80,6 +83,8 @@ import android.widget.TextView;
 				listaMunicipios.add(e.getMunicipioCiudad());
 			}
 		}
+		java.util.Collections.sort(listaMunicipios);
+		listaMunicipios.add(0, "Seleccione");
 		return listaMunicipios;
 	}
 
@@ -102,6 +107,8 @@ import android.widget.TextView;
 				}
 			}
 		}
+		java.util.Collections.sort(listaEstadoObra);
+		listaEstadoObra.add(0, "Seleccione");
 		return listaEstadoObra;
 	}
 }

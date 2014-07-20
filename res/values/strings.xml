@@ -17,5 +17,6 @@
     <string name="PACosto">Costo</string>
     <string name="PuntoAt">PuntoAtencion</string>
     <string name="title_activity_busqueda_viviendas">BusquedaViviendas</string>
+    <string name="title_activity_mostrar_vivienda">MostrarVivienda</string>
 
 </resources>
