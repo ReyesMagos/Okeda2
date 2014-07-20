@@ -30,6 +30,10 @@
             android:name="co.gov.fna.presentacion.actividades.DashBoard"
             android:label="@string/title_activity_dash_board" >
         </activity>
+        <activity
+            android:name="co.gov.fna.presentacion.actividades.BusquedaViviendas"
+            android:label="@string/title_activity_busqueda_viviendas" >
+        </activity>
     </application>
 
 </manifest>
