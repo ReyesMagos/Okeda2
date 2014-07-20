@@ -18,7 +18,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="co.gov.fna.presentacion.actividades.LoginActitvity"
+            android:name="co.gov.fna.okeda.presentacion.actividades.LoginActitvity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,11 +27,15 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="co.gov.fna.presentacion.actividades.DashBoard"
+            android:name="co.gov.fna.okeda.presentacion.actividades.Dashboard.DashBoard"
             android:label="@string/title_activity_dash_board" >
         </activity>
         <activity
-            android:name="co.gov.fna.presentacion.actividades.BusquedaViviendas"
+            android:name="co.gov.fna.okeda.presentacion.actividades.BusquedaViviendas"
+            android:label="@string/title_activity_busqueda_viviendas" >
+        </activity>
+        <activity
+            android:name="com.example.usuario.tryww.BusquedaViviendas"
             android:label="@string/title_activity_busqueda_viviendas" >
         </activity>
     </application>
