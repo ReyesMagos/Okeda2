@@ -35,7 +35,7 @@ public class FactoryVivienda implements IFactoryVivienda {
     @Override
     public List<Entidades> getViviendasRest() {
     
-        return listaViviendas;
+        return this.listaViviendas;
     }
 
 
@@ -162,7 +162,7 @@ public class FactoryVivienda implements IFactoryVivienda {
                 listaViviendas.add(v);
 
             }
-
+            setListaViviendas(listaViviendas);
 
 
         } catch (JSONException e) {
@@ -172,7 +172,7 @@ public class FactoryVivienda implements IFactoryVivienda {
     }
 
 	public List<Entidades> getListaViviendas() {
-		return listaViviendas;
+		return this.listaViviendas;
 	}
 
 	public void setListaViviendas(List<Entidades> listaViviendas) {

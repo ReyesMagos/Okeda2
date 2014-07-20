@@ -13,6 +13,7 @@ import org.json.JSONObject;
 
 import co.gov.fna.okeda.controladores.ControladorLoginActivity;
 import co.gov.fna.okeda.presentacion.actividades.LoginActitvity;
+import co.gov.fna.okeda.utilidades.Utilities;
 
 /**
  * Created by usuario on 1/07/14.
@@ -24,12 +25,14 @@ public class GetRestServices extends AsyncTask<String,String, String> {
     private String TAG_RESPONSE_OK="its_ok";
     private String TAG_RESPONSE_ERROR="something_go_wrong";
     private ControladorLoginActivity controlador;
+    private Utilities util;
 
     public GetRestServices(String url,Activity activity) {
         this.url = url;
+        this.util = new Utilities(activity);
         if(activity instanceof LoginActitvity) {
             this.controlador = new ControladorLoginActivity((LoginActitvity) activity);
-            //controlador.setGoingForViviendasSet(true);
+            controlador.setGoingForViviendasSet(true);
         }
 
 
@@ -71,10 +74,12 @@ public class GetRestServices extends AsyncTask<String,String, String> {
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
+        this.util.showDialog("ALerta", "Por Favor Espere", false);
     }
 
     @Override
     protected void onPostExecute(String s) {
         super.onPostExecute(s);
+        this.util.cancellDialog();
     }
 }
