@@ -15,6 +15,7 @@
         <item name="longitud">longitud</item>
         <item name="municipio">municipio</item>
         <item name="no">no</item>
+        <item name="partition_key">partition_key</item>
         <item name="tipodeentidad">tipodeentidad</item>
         <item name="tipodeservicioqueofrecealafiliado">tipodeservicioqueofrecealafiliado</item>
 

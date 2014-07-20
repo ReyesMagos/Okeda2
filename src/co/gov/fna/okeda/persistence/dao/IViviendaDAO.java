@@ -10,10 +10,12 @@ import java.util.List;
  */
 public interface IViviendaDAO {
 
-    public List<ContentValues> findAll();
+    public List<ContentValues> findAll(Boolean distinct, String table,
+			String[] columns, String selection, String[] selectionArgs,
+			String groupBy, String having, String orderBy, String limit);
 
     public ContentValues save (ContentValues viviendaContentValues);
 
-    public ContentValues update (ContentValues viviendaContentValues);
+    public ContentValues update (ContentValues viviendaContentValues, String whereClause, String[] whereArgs);
 
 }
