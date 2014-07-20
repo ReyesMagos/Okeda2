@@ -1,17 +1,17 @@
 package co.gov.fna.okeda.controladores;
 
-import android.app.Activity;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-
-import com.example.usuario.tryww.R;
-
 import java.util.ArrayList;
 import java.util.List;
 
+import android.graphics.BitmapFactory;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import co.gov.fna.okeda.presentacion.actividades.Dashboard.DashBoard;
 import co.gov.fna.okeda.presentacion.actividades.Dashboard.util.OpcionesDashBoard;
 import co.gov.fna.okeda.presentacion.actividades.adaptadores.CustomAdapter;
+
+import com.example.usuario.tryww.R;
 
 /**
  * Created by usuario on 19/07/14.
@@ -40,6 +40,18 @@ public class ControladorDashBoard {
            listaOpcionesDashBoard.add(opcionesDashBoard);
            CustomAdapter c = new CustomAdapter(activity.getApplicationContext(), listaOpcionesDashBoard);
             activity.getGridOpciones().setAdapter(c);
+            activity.getGridOpciones().setOnItemClickListener(new OnItemClickListener() {
+
+				@Override
+				public void onItemClick(AdapterView<?> arg0, View arg1,
+						int arg2, long arg3) {
+					if(arg2==0){
+						activity.openBusquedaViviendas();
+					}
+					// TODO Auto-generated method stub
+					
+				}
+			});
 
        }
 

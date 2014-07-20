@@ -13,6 +13,7 @@ import co.gov.fna.okeda.modelo.entidades.Entidades;
 import co.gov.fna.okeda.modelo.entidades.Usuario;
 import co.gov.fna.okeda.modelo.entidades.Vivienda;
 import co.gov.fna.okeda.presentacion.actividades.LoginActitvity;
+import co.gov.fna.okeda.presentacion.actividades.Dashboard.DashBoard;
 import co.gov.fna.okeda.process.impl.ViviendaProcessImpl;
 import co.gov.fna.okeda.servicios.GetRestServices;
 import co.gov.fna.okeda.utilidades.Utilities;
@@ -49,6 +50,7 @@ public class ControladorLoginActivity {
 				FactoryVivienda factory = FactoryVivienda.getInstance();
 				factory.fillViviendas(arregloJSON, viviendaPropertysNames);
 				this.saveViviendaIntoDatabase(factory.getListaViviendas());
+				this.activity.changeToActivy(DashBoard.class);
 			} catch (JSONException e) {
 
 			}
@@ -121,6 +123,8 @@ public class ControladorLoginActivity {
 					usuario = new Usuario(user);
 					Comunicador.setUser(usuario);
 					utilidades.showAlertMessage("Inicio Exitoso", "Exito");
+					setGoingForViviendasSet(true);
+					getRestFullServices();
 
 				} else {
 					utilidades.showAlertMessage("Error verifique sus datos",

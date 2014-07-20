@@ -3,15 +3,19 @@ package co.gov.fna.okeda.presentacion.actividades;
 import co.gov.fna.okeda.controladores.ControladorComentarios;
 import co.gov.fna.okeda.controladores.ControladorMostrarVivienda;
 
+import com.example.usuario.tryww.MapasAc;
 import com.example.usuario.tryww.R;
 import com.example.usuario.tryww.R.id;
 import com.example.usuario.tryww.R.layout;
 import com.example.usuario.tryww.R.menu;
+import com.google.android.gms.maps.model.LatLng;
 
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Point;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -67,9 +71,15 @@ public class MostrarVivienda extends Activity {
 		
 	}
 	public void mapaVEr(View v){
-		Class c= MapaActivity.class;
-		Intent i = new Intent(this, MapaActivity.class);
-		startActivity(i);
+		//Class c= MapaActivity.class;
+		//Intent i = new Intent(this, MapasAc.class);
+		//startActivity(i);
+		double x =controlador.getVivienda().getUbicacion().getLatitud();
+		double y=controlador.getVivienda().getUbicacion().getLonguitud();
+		Uri streetViewUri = Uri.parse(
+                "google.streetview:cbll=" + x+","+y + "&cbp=1,90,,0,1.0&mz=20");
+        Intent streetViewIntent = new Intent(Intent.ACTION_VIEW, streetViewUri);
+        startActivity(streetViewIntent);//
 	}
 	
 	public void initComponents() {
