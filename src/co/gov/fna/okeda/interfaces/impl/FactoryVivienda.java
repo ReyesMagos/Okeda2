@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import co.gov.fna.okeda.interfaces.IFactoryVivienda;
+import co.gov.fna.okeda.modelo.entidades.Entidades;
 import co.gov.fna.okeda.modelo.entidades.Ubicacion;
 import co.gov.fna.okeda.modelo.entidades.Vivienda;
 
@@ -17,7 +18,7 @@ import co.gov.fna.okeda.modelo.entidades.Vivienda;
 public class FactoryVivienda implements IFactoryVivienda {
 
     private static FactoryVivienda instance;
-    private List<Vivienda> listaViviendas;
+    private List<Entidades> listaViviendas;
 
     private FactoryVivienda() {
 
@@ -32,7 +33,8 @@ public class FactoryVivienda implements IFactoryVivienda {
 
 
     @Override
-    public List<Vivienda> getViviendasRest() {
+    public List<Entidades> getViviendasRest() {
+    
         return listaViviendas;
     }
 
@@ -43,8 +45,8 @@ public class FactoryVivienda implements IFactoryVivienda {
         if (arreglo == null || arreglo.length() == 0) {
             return;
         }
-
-        listaViviendas = new ArrayList<Vivienda>();
+        
+        listaViviendas = new ArrayList<Entidades>();
         JSONObject object;
         try {
             for (int i = 0; i < arreglo.length(); i++) {
@@ -70,7 +72,7 @@ public class FactoryVivienda implements IFactoryVivienda {
                 j++;
                 v.setCreditoFna(object.getString(arrayPropertiesNames[j]));
                 j++;
-                v.setCiudad(object.getString(arrayPropertiesNames[j]));
+                v.setMunicipioCiudad(object.getString(arrayPropertiesNames[j]));
                 j++;
                 v.setCuotaInicial(object.getString(arrayPropertiesNames[j]));
                 j++;
@@ -168,4 +170,14 @@ public class FactoryVivienda implements IFactoryVivienda {
         }
 
     }
+
+	public List<Entidades> getListaViviendas() {
+		return listaViviendas;
+	}
+
+	public void setListaViviendas(List<Entidades> listaViviendas) {
+		this.listaViviendas = listaViviendas;
+	}
+    
+    
 }

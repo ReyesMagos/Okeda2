@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Created by Oscar Gallon
  */
-public class Vivienda {
+public class Vivienda extends Entidades {
 
     private String aplicaSubsidio;
     private String telefonoCelularSalaDeVentas;
@@ -24,7 +24,6 @@ public class Vivienda {
     private String acabado;
     private String diaDeAtencionDesde;
     private String telefonoFijoSalaDeVentas;
-    private Ubicacion ubicacion;
     private String cuotaInicial;
     private String cuotaMensual;
     private List<String> urlImagenes;
@@ -32,7 +31,6 @@ public class Vivienda {
     private String tipoInmuebleOfrecido;
     private String nombreRepresentanteLegalConstructora;
     private String creditoFna;
-    private String ciudad;
     private String claseDEVivienda;
     private String nombreContactoConstructora;
     private String nombreContatoSalaDeVentas;
@@ -47,13 +45,19 @@ public class Vivienda {
     private String nitConstructora;
     private String direccionProyecto;
     private String precioDesde;
-    private String departamento;
     private String precioHasta;
     private String nombreConstructora;
     private String nombreProyecto;
     private String partitionKey;
+    
+    
 
-    public String getPartitionKey() {
+    public Vivienda() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public String getPartitionKey() {
         return partitionKey;
     }
 
@@ -93,13 +97,7 @@ public class Vivienda {
         this.nombreProyecto = nombreProyecto;
     }
 
-    public String getDepartamento() {
-        return departamento;
-    }
-
-    public void setDepartamento(String departamento) {
-        this.departamento = departamento;
-    }
+ 
 
     public String getTelefonoCelularSalaDeVentas() {
         return telefonoCelularSalaDeVentas;
@@ -205,13 +203,7 @@ public class Vivienda {
         this.telefonoFijoSalaDeVentas = telefonoFijoSalaDeVentas;
     }
 
-    public Ubicacion getUbicacion() {
-        return ubicacion;
-    }
 
-    public void setUbicacion(Ubicacion ubicacion) {
-        this.ubicacion = ubicacion;
-    }
 
     public String getCuotaInicial() {
         return cuotaInicial;
@@ -261,13 +253,7 @@ public class Vivienda {
         this.creditoFna = creditoFna;
     }
 
-    public String getCiudad() {
-        return ciudad;
-    }
 
-    public void setCiudad(String ciudad) {
-        this.ciudad = ciudad;
-    }
 
     public String getClaseDEVivienda() {
         return claseDEVivienda;

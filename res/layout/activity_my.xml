@@ -2,6 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".MyActivity">
 
 
@@ -32,5 +33,12 @@
         android:text="dash"
         android:onClick="openDashBoar"
         android:id="@+id/btnDashBoard" />
+    
+       <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="BusquedaViviendas"
+        android:onClick="openBusquedaViviendas"
+        android:id="@+id/btnBusquedaViviendas" />
 
 </LinearLayout>

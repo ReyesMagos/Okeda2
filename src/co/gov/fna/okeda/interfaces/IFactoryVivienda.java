@@ -4,6 +4,7 @@ import org.json.JSONArray;
 
 import java.util.List;
 
+import co.gov.fna.okeda.modelo.entidades.Entidades;
 import co.gov.fna.okeda.modelo.entidades.Vivienda;
 
 /**
@@ -11,6 +12,6 @@ import co.gov.fna.okeda.modelo.entidades.Vivienda;
  */
 public interface  IFactoryVivienda {
 
-    List<Vivienda> getViviendasRest();
+    List<Entidades> getViviendasRest();
     void fillViviendas(JSONArray arreglo, String [] arrayPropertiesNames);
 }

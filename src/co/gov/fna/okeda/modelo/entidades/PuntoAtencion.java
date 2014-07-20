@@ -5,14 +5,13 @@ import co.gov.fna.okeda.modelo.entidades.Ubicacion;
 /**
  * Created by Alexis-PC on 19/07/2014.
  */
-public class PuntoAtencion {
+public class PuntoAtencion extends Entidades {
 
     private String tipoEntidad;
     private String numero;
-    private Ubicacion ubicacion;
+
     private String direccion;
-    private String departamento;
-    private String municipio;
+
     private String horarioAtencion;
     private String horarioExtendido;
     private String tipoServicioOfrecido;
@@ -25,7 +24,7 @@ public class PuntoAtencion {
         setNumero(numero);
         setUbicacion(ubicacion);
         setDepartamento(departamento);
-        setMunicipio(municipio);
+        setMunicipioCiudad(municipio);
         setCedulaCodigoBarras(cedulaCodigoBarras);
     }
 
@@ -48,13 +47,7 @@ public class PuntoAtencion {
         this.numero = numero;
     }
 
-    public Ubicacion getUbicacion() {
-        return ubicacion;
-    }
 
-    public void setUbicacion(Ubicacion ubicacion) {
-        this.ubicacion = ubicacion;
-    }
 
     public String getDireccion() {
         return direccion;
@@ -64,21 +57,7 @@ public class PuntoAtencion {
         this.direccion = direccion;
     }
 
-    public String getDepartamento() {
-        return departamento;
-    }
 
-    public void setDepartamento(String departamento) {
-        this.departamento = departamento;
-    }
-
-    public String getMunicipio() {
-        return municipio;
-    }
-
-    public void setMunicipio(String municipio) {
-        this.municipio = municipio;
-    }
 
     public String getHorarioAtencion() {
         return horarioAtencion;
