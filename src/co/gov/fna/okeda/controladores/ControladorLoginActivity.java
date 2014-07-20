@@ -117,8 +117,7 @@ public class ControladorLoginActivity {
 			public void done(ParseUser user, ParseException e) {
 
 				if (user != null) {
-					// Hooray! The user is logged in.
-
+					// Hooray! The user is logged in
 					utilidades.cancellDialog();
 					usuario = new Usuario(user);
 					Comunicador.setUser(usuario);
@@ -129,7 +128,9 @@ public class ControladorLoginActivity {
 				} else {
 					utilidades.showAlertMessage("Error verifique sus datos",
 							"Error");
+					
 				}
+				utilidades.cancellDialog();
 			}
 		});
 
