@@ -5,6 +5,9 @@ import java.util.List;
 
 import co.gov.fna.okeda.interfaces.IBusquedaCriteros;
 import co.gov.fna.okeda.modelo.entidades.Entidades;
+
+import co.gov.fna.okeda.modelo.entidades.Vivienda;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -76,7 +79,11 @@ import android.widget.TextView;
 		List<String> listaMunicipios = new ArrayList<String>();
 		for(Entidades e:listaEntidades){
 			if(!isElementOnList(e.getMunicipioCiudad(), listaMunicipios)){
-				listaMunicipios.add(e.getDepartamento());
+
+	
+
+				listaMunicipios.add(e.getMunicipioCiudad());
+
 			}
 		}
 		return listaMunicipios;
@@ -94,8 +101,13 @@ import android.widget.TextView;
 		// TODO Auto-generated method stub
 		List<String> listaEstadoObra = new ArrayList<String>();
 		for(Entidades e:listaEntidades){
-			if(!isElementOnList(e.getMunicipioCiudad(), listaEstadoObra)){
-				listaEstadoObra.add(e.getDepartamento());
+
+		
+				if(e instanceof Vivienda){
+				Vivienda v = (Vivienda)e;
+				if(!isElementOnList(v.getEstadoObra(), listaEstadoObra)){
+					listaEstadoObra.add(v.getEstadoObra());
+				}
 			}
 		}
 		return listaEstadoObra;

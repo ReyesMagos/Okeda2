@@ -60,7 +60,7 @@ public class ViviendaProcessImpl implements IViviendaProcess {
 				vivienda.getCantidadDeInmueblesDisponibles());
 		contentValues.put(ViviendaContract.Column.CARACTERISTICAS_PROYECTO,
 				vivienda.getCaracteristicasProyecto());
-		contentValues.put(ViviendaContract.Column.CIUDAD, vivienda.getCiudad());
+		contentValues.put(ViviendaContract.Column.CIUDAD, vivienda.getMunicipioCiudad());
 		contentValues.put(ViviendaContract.Column.CLASE_DE_VIVIENDA,
 				vivienda.getClaseDEVivienda());
 		contentValues.put(ViviendaContract.Column.CREDITO_FNA,

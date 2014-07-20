@@ -1,11 +1,11 @@
 package co.gov.fna.okeda.modelo.entidades;
 
-import co.gov.fna.okeda.modelo.entidades.Ubicacion;
 
-/**
- * Created by Alexis-PC on 19/07/2014.
- */
-public class PuntoAtencion {
+
+public class PuntoAtencion extends Entidades {
+
+
+    
 
 	private String tipoEntidad;
 	private String numero;
@@ -130,4 +130,5 @@ public class PuntoAtencion {
 	public void setCedulaCodigoBarras(String cedulaCodigoBarras) {
 		this.cedulaCodigoBarras = cedulaCodigoBarras;
 	}
+
 }
