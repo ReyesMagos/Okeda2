@@ -5,6 +5,7 @@ import java.util.List;
 
 import co.gov.fna.okeda.interfaces.IBusquedaCriteros;
 import co.gov.fna.okeda.modelo.entidades.Entidades;
+import co.gov.fna.okeda.modelo.entidades.PuntoAtencion;
 import co.gov.fna.okeda.modelo.entidades.Vivienda;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -110,6 +111,42 @@ import android.widget.TextView;
 		java.util.Collections.sort(listaEstadoObra);
 		listaEstadoObra.add(0, "Seleccione");
 		return listaEstadoObra;
+	}
+	
+	
+
+	@Override
+	public List<String> getCostos(List<Entidades> listaEntidades) {
+		List<String> listaCosto = new ArrayList<String>();
+		for(Entidades e:listaEntidades){
+			if(e instanceof PuntoAtencion){
+				PuntoAtencion v = (PuntoAtencion)e;
+				if(!isElementOnList(v.getCostoTransaccion(), listaCosto)){
+					listaCosto.add(v.getCostoTransaccion());
+				}
+			}
+		}
+		
+		java.util.Collections.sort(listaCosto);
+		listaCosto.add(0, "Seleccione");
+		return listaCosto;
+	}
+
+	@Override
+	public List<String> getTipo(List<Entidades> listaEntidades) {
+		List<String> listaTipo = new ArrayList<String>();
+		for(Entidades e:listaEntidades){
+			if(e instanceof PuntoAtencion){
+				PuntoAtencion v = (PuntoAtencion)e;
+				if(!isElementOnList(v.getTipoServicioOfrecido(), listaTipo)){
+					listaTipo.add(v.getTipoServicioOfrecido());
+				}
+			}
+		}
+		
+		java.util.Collections.sort(listaTipo);
+		listaTipo.add(0, "Seleccione");
+		return listaTipo;
 	}
 }
 

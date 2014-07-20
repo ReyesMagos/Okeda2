@@ -54,7 +54,7 @@ public class BusquedaViviendas extends Activity {
 		spEstadoObra = (Spinner) findViewById(R.id.spEstadoObra);
 		txtPrecioDesde = (EditText) findViewById(R.id.txtPrecioDesde);
 		txtPrecioHasta = (EditText) findViewById(R.id.txtPrecioHasta);
-		btn= (ImageView)findViewById(R.id.imageView1);
+		btn= (ImageView)findViewById(R.id.btnBuscar);
 		btn.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -70,7 +70,9 @@ public class BusquedaViviendas extends Activity {
 		Intent i = new Intent(this,MostrarVivienda.class);
 		startActivity(i);
 	}
-
+	public void btnClick(View v){
+		controlador.processSearchButton();
+	}
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 

@@ -1,19 +1,19 @@
 package co.gov.fna.okeda.controladores;
 
+import java.util.List;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.util.Log;
-import co.gov.fna.okeda.interfaces.impl.FactoryPuntoAtencion;
 import co.gov.fna.okeda.interfaces.impl.FactoryVivienda;
+import co.gov.fna.okeda.modelo.entidades.Entidades;
 import co.gov.fna.okeda.modelo.entidades.Usuario;
-import co.gov.fna.okeda.presentacion.actividades.BusquedaViviendas;
+import co.gov.fna.okeda.modelo.entidades.Vivienda;
 import co.gov.fna.okeda.presentacion.actividades.LoginActitvity;
-import co.gov.fna.okeda.presentacion.actividades.PuntoAtencionActivity;
-import co.gov.fna.okeda.presentacion.actividades.Dashboard.DashBoard;
+import co.gov.fna.okeda.process.impl.ViviendaProcessImpl;
 import co.gov.fna.okeda.servicios.GetRestServices;
 import co.gov.fna.okeda.utilidades.Utilities;
 
@@ -28,139 +28,159 @@ import com.parse.SignUpCallback;
  */
 public class ControladorLoginActivity {
 
-    private boolean isGoingForViviendasSet;
-    private LoginActitvity activity;
-    private String[] urlSet;
-    private Usuario usuario;
+	private boolean isGoingForViviendasSet;
+	private LoginActitvity activity;
+	private String[] urlSet;
+	private Usuario usuario;
+	private ViviendaProcessImpl viviendaProcessImpl;
 
-    public ControladorLoginActivity(LoginActitvity actividad){
-        this.activity= actividad;
-        this.urlSet= actividad.getResources().getStringArray(R.array.urlset);
+	public ControladorLoginActivity(LoginActitvity actividad) {
+		this.activity = actividad;
+		this.urlSet = actividad.getResources().getStringArray(R.array.urlset);
 
-    }
+	}
 
-    public void procesaRespuestaRestFul(JSONObject objeto){
-        if(isGoingForViviendasSet){
-            try{
-                String[] viviendaPropertysNames = activity.getResources().getStringArray(R.array.viviendas_properties_names);
-                JSONArray arregloJSON = objeto.getJSONArray("d");
-                FactoryVivienda factory = FactoryVivienda.getInstance();
-                factory.fillViviendas(arregloJSON, viviendaPropertysNames);
-            }catch(JSONException e){
+	public void procesaRespuestaRestFul(JSONObject objeto) {
+		if (isGoingForViviendasSet) {
+			try {
+				String[] viviendaPropertysNames = activity.getResources()
+						.getStringArray(R.array.viviendas_properties_names);
+				JSONArray arregloJSON = objeto.getJSONArray("d");
+				FactoryVivienda factory = FactoryVivienda.getInstance();
+				factory.fillViviendas(arregloJSON, viviendaPropertysNames);
+				this.saveViviendaIntoDatabase(factory.getListaViviendas());
+			} catch (JSONException e) {
 
-            }
-        }
+			}
+		}
 
-//        }else{
-//            try{
-//                String[] puntosPropertysNames = activity.getResources().getStringArray(R.array.puntosatencion_properties_names);
-//                JSONArray arregloJSON = objeto.getJSONArray("d");
-//                FactoryPuntoAtencion factory = FactoryPuntoAtencion.getInstance();
-//                factory.fillPuntoAtencion(arregloJSON, puntosPropertysNames);
-//            }catch(JSONException e){
-//
-//            }
-//        }
-    }
+		// }else{
+		// try{
+		// String[] puntosPropertysNames =
+		// activity.getResources().getStringArray(R.array.puntosatencion_properties_names);
+		// JSONArray arregloJSON = objeto.getJSONArray("d");
+		// FactoryPuntoAtencion factory = FactoryPuntoAtencion.getInstance();
+		// factory.fillPuntoAtencion(arregloJSON, puntosPropertysNames);
+		// }catch(JSONException e){
+		//
+		// }
+		// }
+	}
 
-    public void changeToActivy(Class a){
-    	Intent i = new Intent(activity,a) ;
-        activity.startActivity(i);
-    }
+	public void changeToActivy(Class a) {
+		Intent i = new Intent(activity, a);
+		activity.startActivity(i);
+	}
 
-    public void showMessage(String title, String menssage){
-        Utilities util= new Utilities(activity);
-        util.showAlertMessage(title,menssage);
-    }
+	public void showMessage(String title, String menssage) {
+		Utilities util = new Utilities(activity);
+		util.showAlertMessage(title, menssage);
+	}
 
-    public void singUp(String userName, String password, String email, String mobile){
-        final Utilities utilidades = new Utilities(activity);
-        utilidades.showDialog("Alerta", "Registrando  Espere por Favor", false);
-        ParseUser user = new ParseUser();
-        user.setUsername(userName);
-        user.setPassword(password);
-        user.setEmail(email);
-        user.put("mobile",mobile);
+	public void singUp(String userName, String password, String email,
+			String mobile) {
+		final Utilities utilidades = new Utilities(activity);
+		utilidades.showDialog("Alerta", "Registrando  Espere por Favor", false);
+		ParseUser user = new ParseUser();
+		user.setUsername(userName);
+		user.setPassword(password);
+		user.setEmail(email);
+		user.put("mobile", mobile);
 
-        user.signUpInBackground(new SignUpCallback() {
-            public void done(ParseException e) {
-                if (e == null) {
-                    utilidades.cancellDialog();
-                    utilidades.showAlertMessage("Registro Exitoso","Exito");
+		user.signUpInBackground(new SignUpCallback() {
+			public void done(ParseException e) {
+				if (e == null) {
+					utilidades.cancellDialog();
+					utilidades.showAlertMessage("Registro Exitoso", "Exito");
 
-                } else {
-                    // Sign up didn't succeed. Look at the ParseException
-                    // to figure out what went wrong
-                    Log.i("error",e.getMessage());
-                    utilidades.showAlertMessage("Error verifique sus datos","Error");
-                }
-            }
-        });
+				} else {
+					// Sign up didn't succeed. Look at the ParseException
+					// to figure out what went wrong
+					Log.i("error", e.getMessage());
+					utilidades.showAlertMessage("Error verifique sus datos",
+							"Error");
+				}
+			}
+		});
 
-    }
+	}
 
-    public void loggin(String user, String pass){
-        final Utilities utilidades = new Utilities(activity);
-        utilidades.showDialog("Alerta", "iniciando Session Espere por Favor", false);
+	public void loggin(String user, String pass) {
+		final Utilities utilidades = new Utilities(activity);
+		utilidades.showDialog("Alerta", "iniciando Session Espere por Favor",
+				false);
 
+		ParseUser.logInInBackground(user, pass, new LogInCallback() {
 
-        ParseUser.logInInBackground(user, pass, new LogInCallback() {
+			public void done(ParseUser user, ParseException e) {
 
+				if (user != null) {
+					// Hooray! The user is logged in.
 
-            public void done(ParseUser user, ParseException e) {
+					utilidades.cancellDialog();
+					usuario = new Usuario(user);
+					Comunicador.setUser(usuario);
+					utilidades.showAlertMessage("Inicio Exitoso", "Exito");
 
-                if (user != null) {
-                    // Hooray! The user is logged in.
+				} else {
+					utilidades.showAlertMessage("Error verifique sus datos",
+							"Error");
+				}
+			}
+		});
 
-                    utilidades.cancellDialog();
-                    usuario= new Usuario(user);
-                    utilidades.showAlertMessage("Inicio Exitoso","Exito");
+	}
 
-                } else {
-                    utilidades.showAlertMessage("Error verifique sus datos","Error");
-                }
-            }
-        });
+	public void getRestFullServices() {
+		GetRestServices services;
+		if (isGoingForViviendasSet) {
+			services = new GetRestServices(getUrlSet()[0], getActivity());
+		} else {
+			services = new GetRestServices(getUrlSet()[1], getActivity());
+		}
+		this.isGoingForViviendasSet = true;
+		services.execute();
 
-    }
+	}
 
-    public void getRestFullServices(){
-        GetRestServices services;
-        if(isGoingForViviendasSet) {
-             services =
-                    new GetRestServices(getUrlSet()[0],getActivity());
-        }else{
-            services =
-                    new GetRestServices(getUrlSet()[1],getActivity());
-        }
-        this.isGoingForViviendasSet=true;
-        services.execute();
+	public boolean isGoingForViviendasSet() {
+		return isGoingForViviendasSet;
+	}
 
-    }
+	public void setGoingForViviendasSet(boolean isGoingForViviendasSet) {
+		this.isGoingForViviendasSet = isGoingForViviendasSet;
+	}
 
-    public boolean isGoingForViviendasSet() {
-        return isGoingForViviendasSet;
-    }
+	public LoginActitvity getActivity() {
+		return activity;
+	}
 
-    public void setGoingForViviendasSet(boolean isGoingForViviendasSet) {
-        this.isGoingForViviendasSet = isGoingForViviendasSet;
-    }
+	public void setActivity(LoginActitvity activity) {
+		this.activity = activity;
+	}
 
-    public LoginActitvity getActivity() {
-        return activity;
-    }
+	public String[] getUrlSet() {
+		return urlSet;
+	}
 
-    public void setActivity(LoginActitvity activity) {
-        this.activity = activity;
-    }
+	public void setUrlSet(String[] urlSet) {
+		this.urlSet = urlSet;
+	}
 
-    public String[] getUrlSet() {
-        return urlSet;
-    }
+	public void saveViviendaIntoDatabase(List<Entidades> entidadesList) {
+		this.viviendaProcessImpl = new ViviendaProcessImpl(getActivity()
+				.getApplicationContext());
+		Vivienda vivienda;
 
-    public void setUrlSet(String[] urlSet) {
-        this.urlSet = urlSet;
-    }
+		for (int i = 0; i < entidadesList.size(); i++) {
+			vivienda = (Vivienda) entidadesList.get(i);
+			try {
+				this.viviendaProcessImpl.saveVivienda(vivienda);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+		}
+
+	}
 }
-
-

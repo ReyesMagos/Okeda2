@@ -1,5 +1,6 @@
 package co.gov.fna.okeda.presentacion.actividades;
 
+import co.gov.fna.okeda.controladores.ControladorComentarios;
 import co.gov.fna.okeda.controladores.ControladorMostrarVivienda;
 
 import com.example.usuario.tryww.R;
@@ -10,6 +11,7 @@ import com.example.usuario.tryww.R.menu;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -58,7 +60,18 @@ public class MostrarVivienda extends Activity {
 		controlador.showViviendaInformation();
 		controlador.goForImagenes();
 	}
-
+	
+	public void comentar(View v){
+		Intent i = new Intent(this, ComentariosActivity.class);
+		startActivity(i);
+		
+	}
+	public void mapaVEr(View v){
+		Class c= MapaActivity.class;
+		Intent i = new Intent(this, MapaActivity.class);
+		startActivity(i);
+	}
+	
 	public void initComponents() {
 		txtNombreProyecto = (TextView) findViewById(R.id.txtNombreProyecto);
 		txtClaseDeVivienda = (TextView) findViewById(R.id.txtClaseDeVivienda);

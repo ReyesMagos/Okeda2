@@ -63,6 +63,8 @@ public class ControladorBusquedaVivienda {
 							.setVivienda((Vivienda) listaViviendasEncontradas
 									.get(arg1));
 					activity.showVivienda();
+					Comunicador.setEntidad((Vivienda) listaViviendasEncontradas
+									.get(arg1));
 				}
 			});
 			builderSingle.show();
@@ -312,10 +314,12 @@ public class ControladorBusquedaVivienda {
 		} else if (precioHastaSeleccionado != null) {
 			searchByPrecioHasta(precioHastaSeleccionado);
 		}
-
-		Utilities utilities = new Utilities(activity);
-		utilities.showAlertMessage(
-				"Error Parametros de Busqueda Vacios o Invalidos", "Error");
+		else{
+			Utilities utilities = new Utilities(activity);
+			utilities.showAlertMessage(
+					"Error Parametros de Busqueda Vacios o Invalidos", "Error");
+		}
+		
 
 	}
 

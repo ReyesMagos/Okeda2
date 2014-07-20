@@ -92,7 +92,7 @@ public class LoginActitvity extends Activity {
         
     }
     public void atencion(View v){
-    	Intent myItent = new Intent(this, PuntoAtencionActivity.class);
+    	Intent myItent = new Intent(this, BusquedaPuntoAtencionActivity.class);
     	startActivity(myItent);
     }
 

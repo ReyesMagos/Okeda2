@@ -18,5 +18,8 @@
     <string name="PuntoAt">PuntoAtencion</string>
     <string name="title_activity_busqueda_viviendas">BusquedaViviendas</string>
     <string name="title_activity_mostrar_vivienda">MostrarVivienda</string>
+    <string name="title_activity_comentarios">ComentariosActivity</string>
+    <string name="title_activity_busqueda_punto_atencion">BusquedaPuntoAtencionActivity</string>
+    <string name="title_activity_mapa_activty">MapaActivty</string>
 
 </resources>

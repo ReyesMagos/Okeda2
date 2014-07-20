@@ -62,7 +62,7 @@ public class PuntoAtencionProcessImpl implements IPuntoAtencionProcess {
 		contentValues.put(PuntoAtencionContract.Column.LONGITUD, puntoAtencion
 				.getUbicacion().getLonguitud());
 		contentValues.put(PuntoAtencionContract.Column.MUNICIPIO,
-				puntoAtencion.getMunicipio());
+				puntoAtencion.getMunicipioCiudad());
 		contentValues.put(PuntoAtencionContract.Column.NO,
 				puntoAtencion.getNumero());
 		contentValues.put(PuntoAtencionContract.Column.TIPO_DE_ENTIDAD,

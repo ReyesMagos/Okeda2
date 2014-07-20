@@ -4,6 +4,7 @@ package co.gov.fna.okeda.interfaces;
 
 import org.json.JSONArray;
 
+import co.gov.fna.okeda.modelo.entidades.Entidades;
 import co.gov.fna.okeda.modelo.entidades.PuntoAtencion;
 
 import java.util.List;
@@ -13,7 +14,7 @@ import java.util.List;
  */
 public interface IFactoryPuntoAtencion {
 
-    List<PuntoAtencion> getPuntoAtencionRest();
+    List<Entidades> getPuntoAtencionRest();
 
     public void fillPuntoAtencion(JSONArray arreglo, String[] arrayPropertiesNames);
 }

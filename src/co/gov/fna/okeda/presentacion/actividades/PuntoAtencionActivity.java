@@ -29,10 +29,9 @@ public class PuntoAtencionActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_punto_atencion);
 		createComponents();
-		controlador = new ControladorPuntoAtencion(this);
-		controlador.getRestFullServices();
-
-		
+		controlador = ControladorPuntoAtencion.getInstace();
+		controlador.setActivity(this) ;
+		controlador.showPunto();
 	}
 
 	public void createComponents() {
@@ -64,14 +63,8 @@ public class PuntoAtencionActivity extends Activity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
-
-	public void showPunto(View view) {
-		controlador.showPunto();
-		
-	}
 	
 	public void getServices(View v){
 		Log.d("C PuntoAten", "Entre a services");
-		controlador.getRestFullServices();
 	}
 }

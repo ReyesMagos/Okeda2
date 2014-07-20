@@ -26,14 +26,53 @@ public class AccessorSqliteOpenHelper extends SQLiteOpenHelper {
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 		String viviendasTableSqlCreator = String
-				.format("CREATE TABLE %s (%s TEXT PRIMARY KEY,%s TEXT NOT NULL,%s TEXT NOT NULL,%s TEXT NOT NULL,%s TEXT NOT NULL,%s TEXT NOT NULL,"
-						+ "%s TEXT NOT NULL,%s TEXT NOT NULL,%s TEXT NOT NULL,%s TEXT NOT NULL,%s TEXT NOT NULL,%s TEXT NOT NULL"
-						+ ",%s TEXT NOT NULL,%s TEXT NOT NULL,%s TEXT NOT NULL,%s TEXT NOT NULL,%s TEXT NOT NULL,%s TEXT NOT NULL,"
-						+ "%s TEXT NOT NULL,%s TEXT NOT NULL,%s TEXT NOT NULL"
-						+ ",%s TEXT NOT NULL,%s TEXT NOT NULL,%s TEXT NOT NULL,%s TEXT NOT NULL,%s TEXT NOT NULL,%s TEXT NOT NULL,%s TEXT NOT NULL,"
-						+ "%s TEXT NOT NULL,%s TEXT NOT NULL"
-						+ ",%s TEXT NOT NULL,%s TEXT NOT NULL,%s TEXT NOT NULL,%s TEXT NOT NULL,%s TEXT NOT NULL,%s TEXT NOT NULL,%s TEXT NOT NULL"
-						+ ",%s TEXT NOT NULL,%s TEXT NOT NULL,%s TEXT NOT NULL,%s TEXT NOT NULL,%s TEXT NOT NULL,%s TEXT NOT NULL,,%s TEXT NOT NULL,,%s TEXT NOT NULL,,%s TEXT NOT NULL,,%s TEXT NOT NULL,,%s TEXT NOT NULL )",
+				.format("CREATE TABLE %s (" +
+						"%s TEXT PRIMARY KEY," +
+						"%s TEXT," +
+						"%s TEXT," +
+						"%s TEXT," +
+						"%s TEXT," +
+						"%s TEXT,"
+						+ "%s TEXT," +
+						"%s TEXT," +
+						"%s TEXT," +
+						"%s TEXT," +
+						"%s TEXT," +
+						"%s TEXT"
+						+ ",%s TEXT," +
+						"%s TEXT," +
+						"%s TEXT," +
+						"%s TEXT," +
+						"%s TEXT," +
+						"%s TEXT,"
+						+ "%s TEXT," +
+						"%s TEXT," +
+						"%s TEXT"
+						+ ",%s TEXT," +
+						"%s TEXT," +
+						"%s TEXT," +
+						"%s TEXT," +
+						"%s TEXT," +
+						"%s TEXT," +
+						"%s TEXT,"
+						+ "%s TEXT," +
+						"%s TEXT"
+						+ ",%s REAL ," +
+						"%s TEXT," +
+						"%s REAL," +
+						"%s TEXT," +
+						"%s TEXT," +
+						"%s TEXT," +
+						"%s TEXT"
+						+ ",%s TEXT," +
+						"%s TEXT," +
+						"%s TEXT," +
+						"%s TEXT," +
+						"%s TEXT," +
+						"%s TEXT," +
+						"%s TEXT," +
+						"%s TEXT," +
+						"%s TEXT);",
 						ViviendaContract.TABLE_NAME,
 						ViviendaContract.Column.PARTITION_KEY,
 						ViviendaContract.Column.ACABADOS,
@@ -83,9 +122,21 @@ public class AccessorSqliteOpenHelper extends SQLiteOpenHelper {
 						ViviendaContract.Column.VALOR_INMUBLE);
 
 		String puntoAtencionSqlCreator = String
-				.format("CREATE TABLE %s(%s TEXT PRIMARY KEY, %s TEXT NOT NULL, %s TEXT NOT NULL,%s TEXT NOT NULL,"
-						+ "%s TEXT NOT NULL,%s TEXT NOT NULL,%s TEXT NOT NULL,%s TEXT NOT NULL,%s TEXT NOT NULL,%s TEXT NOT NULL,"
-						+ "%s TEXT NOT NULL,%s TEXT NOT NULL,%s TEXT NOT NULL,)",
+				.format("CREATE TABLE %s(" +
+						"%s TEXT PRIMARY KEY," +
+						" %s TEXT," +
+						" %s TEXT," +
+						"%s TEXT,"
+						+ "%s TEXT," +
+						"%s TEXT," +
+						"%s TEXT," +
+						"%s REAL," +
+						"%s REAL," +
+						"%s TEXT,"
+						+ "%s TEXT," +
+						"%s TEXT," +
+						"%s TEXT);",
+						PuntoAtencionContract.TABLE_NAME,
 						PuntoAtencionContract.Column.PARTITION_KEY,
 						PuntoAtencionContract.Column.CEDULA_O_CODIGO_DE_BARRAS,
 						PuntoAtencionContract.Column.COSTO_DE_TRANSACCION,
@@ -112,7 +163,7 @@ public class AccessorSqliteOpenHelper extends SQLiteOpenHelper {
 
 		db.execSQL(String.format("DROP TABLE IF EXISTS %s",
 				ViviendaContract.TABLE_NAME));
-		db.execSQL((String.format("DROP TABLBE IF EXISTS %s",
+		db.execSQL((String.format("DROP TABLE IF EXISTS %s",
 				PuntoAtencionContract.TABLE_NAME)));
 
 		this.onCreate(db);
