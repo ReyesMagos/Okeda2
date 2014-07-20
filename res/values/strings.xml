@@ -15,6 +15,7 @@
     <string name="PAHorarioE">Horario extendido</string>
     <string name="PAServicio">Servicio</string>
     <string name="PACosto">Costo</string>
+    <string name="PuntoAt">PuntoAtencion</string>
     <string name="title_activity_busqueda_viviendas">BusquedaViviendas</string>
 
 </resources>

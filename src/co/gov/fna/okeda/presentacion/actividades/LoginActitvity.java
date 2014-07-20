@@ -91,7 +91,11 @@ public class LoginActitvity extends Activity {
         changeToActivy(DashBoard.class);
         
     }
-    
+    public void atencion(View v){
+    	Intent myItent = new Intent(this, PuntoAtencionActivity.class);
+    	startActivity(myItent);
+    }
+
     public void openBusquedaViviendas(View v){
     	Intent i = new Intent(this,BusquedaViviendas.class) ;
         startActivity(i);

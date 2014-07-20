@@ -12,7 +12,9 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONObject;
 
 import co.gov.fna.okeda.controladores.ControladorLoginActivity;
+import co.gov.fna.okeda.controladores.ControladorPuntoAtencion;
 import co.gov.fna.okeda.presentacion.actividades.LoginActitvity;
+import co.gov.fna.okeda.presentacion.actividades.PuntoAtencionActivity;
 import co.gov.fna.okeda.utilidades.Utilities;
 
 /**
@@ -24,16 +26,20 @@ public class GetRestServices extends AsyncTask<String,String, String> {
     private String url;
     private String TAG_RESPONSE_OK="its_ok";
     private String TAG_RESPONSE_ERROR="something_go_wrong";
-    private ControladorLoginActivity controlador;
+    private ControladorLoginActivity controladorLogin;
+    private ControladorPuntoAtencion controladorPuntoAtencion;
     private Utilities util;
-
+    private Activity activity;
     public GetRestServices(String url,Activity activity) {
         this.url = url;
         this.util = new Utilities(activity);
+        this.activity= activity;
         if(activity instanceof LoginActitvity) {
-            this.controlador = new ControladorLoginActivity((LoginActitvity) activity);
-            controlador.setGoingForViviendasSet(true);
-        }
+            this.controladorLogin = new ControladorLoginActivity((LoginActitvity) activity);
+            controladorLogin.setGoingForViviendasSet(true);
+        }else if (activity instanceof PuntoAtencionActivity) {
+			this.controladorPuntoAtencion = new ControladorPuntoAtencion((PuntoAtencionActivity)activity);
+		}
 
 
     }
@@ -60,7 +66,12 @@ public class GetRestServices extends AsyncTask<String,String, String> {
             HttpEntity entity= resp.getEntity();
             stringResp = EntityUtils.toString(entity);
             JSONObject respJSON= new JSONObject(stringResp);
-            controlador.procesaRespuestaRestFul(respJSON);
+            
+            if (this.activity instanceof LoginActitvity) {
+            	controladorLogin.procesaRespuestaRestFul(respJSON);
+			}else{
+				controladorPuntoAtencion.procesaRespuestaRestFul(respJSON);
+			}
 
         }catch(Exception e){
 

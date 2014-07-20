@@ -1,6 +1,11 @@
 package co.gov.fna.okeda.presentacion.actividades;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import co.gov.fna.okeda.controladores.ControladorBusquedaVivienda;
+import co.gov.fna.okeda.interfaces.impl.FactoryVivienda;
+import co.gov.fna.okeda.modelo.entidades.Entidades;
 
 import com.example.usuario.tryww.R;
 import com.example.usuario.tryww.R.id;
@@ -27,6 +32,8 @@ public class BusquedaViviendas extends Activity {
 	private EditText txtPrecioDesde;
 	private EditText txtPrecioHasta;
 	private ControladorBusquedaVivienda controlador;
+	private List<Entidades>listaViviendasEncontradas;
+	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +53,26 @@ public class BusquedaViviendas extends Activity {
 		txtPrecioDesde= (EditText)findViewById(R.id.txtPrecioDesde);
 		txtPrecioHasta=(EditText)findViewById(R.id.txtPrecioHasta);
 	
+		
+	}
+	
+	public void searchByDepartamento(String departamento){
+		listaViviendasEncontradas = new ArrayList<Entidades>();
+		FactoryVivienda factoryVivienda = FactoryVivienda.getInstance();
+		for(Entidades e: factoryVivienda.getListaViviendas()){
+			if(e.getDepartamento().equals(departamento))
+			listaViviendasEncontradas.add(e);
+		}
+		
+	}
+	
+	public void searchByDepartamentoCiudad(String Departamento, String ciudad){
+		listaViviendasEncontradas = new ArrayList<Entidades>();
+		FactoryVivienda factoryVivienda = FactoryVivienda.getInstance();
+		for(Entidades e: factoryVivienda.getListaViviendas()){
+			if(e.getDepartamento().equals(Departamento)&&e.getMunicipioCiudad().equals(ciudad))
+			listaViviendasEncontradas.add(e);
+		}
 		
 	}
 

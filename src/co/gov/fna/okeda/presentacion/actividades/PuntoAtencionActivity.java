@@ -2,6 +2,7 @@ package co.gov.fna.okeda.presentacion.actividades;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -26,20 +27,23 @@ public class PuntoAtencionActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_punto_atencion);
 		createComponents();
 		controlador = new ControladorPuntoAtencion(this);
-		setContentView(R.layout.activity_punto_atencion);
+		controlador.getRestFullServices();
+
+		
 	}
 
 	public void createComponents() {
-		txt0 = (TextView) findViewById(R.id.textView0);
-		txt1 = (TextView) findViewById(R.id.textView);
-		txt2 = (TextView) findViewById(R.id.textView2);
-		txt3 = (TextView) findViewById(R.id.textView3);
-		txt4 = (TextView) findViewById(R.id.textView4);
-		txt5 = (TextView) findViewById(R.id.textView5);
-		txt6 = (TextView) findViewById(R.id.textView6);
-		txt7 = (TextView) findViewById(R.id.textView7);
+		this.txt0 = (TextView) findViewById(R.id.textView0);
+		this.txt1 = (TextView) findViewById(R.id.textView);
+		this.txt2 = (TextView) findViewById(R.id.textView2);
+		this.txt3 = (TextView) findViewById(R.id.textView3);
+		this.txt4 = (TextView) findViewById(R.id.textView4);
+		this.txt5 = (TextView) findViewById(R.id.textView5);
+		this.txt6 = (TextView) findViewById(R.id.textView6);
+		this.txt7 = (TextView) findViewById(R.id.textView7);
 	}
 
 	@Override
@@ -63,5 +67,11 @@ public class PuntoAtencionActivity extends Activity {
 
 	public void showPunto(View view) {
 		controlador.showPunto();
+		
+	}
+	
+	public void getServices(View v){
+		Log.d("C PuntoAten", "Entre a services");
+		controlador.getRestFullServices();
 	}
 }

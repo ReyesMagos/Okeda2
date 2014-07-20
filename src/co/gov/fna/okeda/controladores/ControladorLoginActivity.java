@@ -49,17 +49,18 @@ public class ControladorLoginActivity {
             }catch(JSONException e){
 
             }
-
-        }else{
-            try{
-                String[] puntosPropertysNames = activity.getResources().getStringArray(R.array.puntosatencion_properties_names);
-                JSONArray arregloJSON = objeto.getJSONArray("d");
-                FactoryPuntoAtencion factory = FactoryPuntoAtencion.getInstance();
-                factory.fillPuntoAtencion(arregloJSON, puntosPropertysNames);
-            }catch(JSONException e){
-
-            }
         }
+
+//        }else{
+//            try{
+//                String[] puntosPropertysNames = activity.getResources().getStringArray(R.array.puntosatencion_properties_names);
+//                JSONArray arregloJSON = objeto.getJSONArray("d");
+//                FactoryPuntoAtencion factory = FactoryPuntoAtencion.getInstance();
+//                factory.fillPuntoAtencion(arregloJSON, puntosPropertysNames);
+//            }catch(JSONException e){
+//
+//            }
+//        }
     }
 
     public void changeToActivy(Class a){

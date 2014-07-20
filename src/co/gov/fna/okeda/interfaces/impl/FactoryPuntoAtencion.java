@@ -71,7 +71,7 @@ public class FactoryPuntoAtencion implements IFactoryPuntoAtencion {
                 p.setUbicacion(u);
                 //termina ubicacion
 
-                p.setMunicipioCiudad(object.getString(arrayPropertiesNames[j]));
+                p.setMunicipio(object.getString(arrayPropertiesNames[j]));
                 j++;
                 p.setNumero(object.getString(arrayPropertiesNames[j]));
                 j++;
@@ -86,5 +86,87 @@ public class FactoryPuntoAtencion implements IFactoryPuntoAtencion {
             return;
         }
 
+    }
+
+    public List<PuntoAtencion> findByDepartamento(String depto){
+        List<PuntoAtencion> retorno = new ArrayList<PuntoAtencion>();
+        for (int i = 0; i < this.listaPuntosV.size(); i++) {
+            PuntoAtencion aux = this.listaPuntosV.get(i);
+
+            if (aux.getDepartamento().equals(depto)){
+                retorno.add(aux);
+            }
+        }
+        if (retorno.isEmpty()){
+            return null;
+        }else{
+            return retorno;
+        }
+
+    }
+
+    public List<PuntoAtencion> findByDepartamentoAndMunicipio(String depto, String muni){
+        List<PuntoAtencion> retorno = new ArrayList<PuntoAtencion>();
+        for (int i = 0; i < this.listaPuntosV.size(); i++) {
+            PuntoAtencion aux = this.listaPuntosV.get(i);
+
+            if (aux.getDepartamento().equals(depto)){
+                if (aux.getMunicipio().equals(muni)){
+                    retorno.add(aux);
+                }
+            }
+        }
+        if (retorno.isEmpty()){
+            return null;
+        }else{
+            return retorno;
+        }
+    }
+    public List<PuntoAtencion> findByTipo(String tipo){
+        List<PuntoAtencion> retorno = new ArrayList<PuntoAtencion>();
+        for (int i = 0; i < this.listaPuntosV.size(); i++) {
+            PuntoAtencion aux = this.listaPuntosV.get(i);
+
+            if (aux.getTipoEntidad().equals(tipo)){
+                retorno.add(aux);
+            }
+        }
+        if (retorno.isEmpty()){
+            return null;
+        }else{
+            return retorno;
+        }
+    }
+
+    public List<PuntoAtencion> findByHorarioAtencion(String hora){
+        List<PuntoAtencion> retorno = new ArrayList<PuntoAtencion>();
+        for (int i = 0; i < this.listaPuntosV.size(); i++) {
+            PuntoAtencion aux = this.listaPuntosV.get(i);
+
+            if (aux.getHorarioAtencion().equals(hora)){
+                retorno.add(aux);
+            }
+        }
+        if (retorno.isEmpty()){
+            return null;
+        }else{
+            return retorno;
+        }
+    }
+
+    public List<PuntoAtencion> findByCosto(String costo){
+        List<PuntoAtencion> retorno = new ArrayList<PuntoAtencion>();
+        for (int i = 0; i < this.listaPuntosV.size(); i++) {
+            PuntoAtencion aux = this.listaPuntosV.get(i);
+
+            if (aux.getCostoTransaccion().equals(costo)){
+                retorno.add(aux);
+            }
+        }
+        if (retorno.isEmpty()){
+            return null;
+        }else{
+            return retorno;
+        }
     }
 }
