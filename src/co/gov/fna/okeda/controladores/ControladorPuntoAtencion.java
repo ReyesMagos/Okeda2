@@ -6,13 +6,10 @@ import org.json.JSONObject;
 
 import com.example.usuario.tryww.R;
 
-import android.app.Activity;
 import android.util.Log;
 import android.widget.Toast;
 import co.gov.fna.okeda.interfaces.impl.FactoryPuntoAtencion;
-import co.gov.fna.okeda.interfaces.impl.FactoryVivienda;
 import co.gov.fna.okeda.modelo.entidades.PuntoAtencion;
-import co.gov.fna.okeda.presentacion.actividades.LoginActitvity;
 import co.gov.fna.okeda.presentacion.actividades.PuntoAtencionActivity;
 import co.gov.fna.okeda.servicios.GetRestServices;
 
