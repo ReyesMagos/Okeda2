@@ -71,7 +71,7 @@ public class FactoryPuntoAtencion implements IFactoryPuntoAtencion {
                 p.setUbicacion(u);
                 //termina ubicacion
 
-                p.setMunicipio(object.getString(arrayPropertiesNames[j]));
+                p.setMunicipioCiudad(object.getString(arrayPropertiesNames[j]));
                 j++;
                 p.setNumero(object.getString(arrayPropertiesNames[j]));
                 j++;

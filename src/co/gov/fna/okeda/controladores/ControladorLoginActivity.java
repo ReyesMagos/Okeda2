@@ -4,12 +4,15 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.util.Log;
 import co.gov.fna.okeda.interfaces.impl.FactoryPuntoAtencion;
 import co.gov.fna.okeda.interfaces.impl.FactoryVivienda;
 import co.gov.fna.okeda.modelo.entidades.Usuario;
+import co.gov.fna.okeda.presentacion.actividades.BusquedaViviendas;
 import co.gov.fna.okeda.presentacion.actividades.LoginActitvity;
+import co.gov.fna.okeda.presentacion.actividades.PuntoAtencionActivity;
 import co.gov.fna.okeda.presentacion.actividades.Dashboard.DashBoard;
 import co.gov.fna.okeda.servicios.GetRestServices;
 import co.gov.fna.okeda.utilidades.Utilities;
@@ -59,8 +62,8 @@ public class ControladorLoginActivity {
         }
     }
 
-    public void changeToDashBoard(){
-        Intent i = new Intent(activity, DashBoard.class);
+    public void changeToActivy(Class a){
+    	Intent i = new Intent(activity,a) ;
         activity.startActivity(i);
     }
 

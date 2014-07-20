@@ -14,8 +14,6 @@ import android.widget.TextView;
 
 import com.parse.Parse;
 import com.parse.ParseAnalytics;
-
-
 import com.example.usuario.tryww.R;
 
 import co.gov.fna.okeda.controladores.ControladorLoginActivity;
@@ -42,7 +40,7 @@ public class LoginActitvity extends Activity {
     }
 
     public void getServices(View v) {
-        //controlador.setGoingForViviendasSet(true);
+        controlador.setGoingForViviendasSet(true);
         controlador.getRestFullServices();
     }
 
@@ -90,13 +88,23 @@ public class LoginActitvity extends Activity {
     }
 
     public void openDashBoar(View v){
-        //controlador.changeToDashBoard();
-        Intent i = new Intent(this, DashBoard.class);
+        changeToActivy(DashBoard.class);
+        
+    }
+    
+    public void openBusquedaViviendas(View v){
+    	Intent i = new Intent(this,BusquedaViviendas.class) ;
         startActivity(i);
     }
+    
 
     public void logIn(View v) {
         controlador.loggin("oscarg798", "oscardx");
+    }
+    
+    public void changeToActivy(Class a){
+    	Intent i = new Intent(this,a) ;
+        startActivity(i);
     }
 
     @Override

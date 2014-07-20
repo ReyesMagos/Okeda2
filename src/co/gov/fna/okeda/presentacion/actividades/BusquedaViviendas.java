@@ -1,5 +1,7 @@
 package co.gov.fna.okeda.presentacion.actividades;
 
+import co.gov.fna.okeda.controladores.ControladorBusquedaVivienda;
+
 import com.example.usuario.tryww.R;
 import com.example.usuario.tryww.R.id;
 import com.example.usuario.tryww.R.layout;
@@ -12,15 +14,38 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.Spinner;
 import android.os.Build;
 
 public class BusquedaViviendas extends Activity {
+	
+	private Spinner spDepartamento;
+	private Spinner spCiudad;
+	private Spinner spEstrato;
+	private Spinner spEstadoObra;
+	private EditText txtPrecioDesde;
+	private EditText txtPrecioHasta;
+	private ControladorBusquedaVivienda controlador;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_busqueda_viviendas);
-
+			initComponents();
+			controlador= new ControladorBusquedaVivienda(this);
+			controlador.setListToSpinner();
+		
+	}
+	
+	public void initComponents(){
+		spDepartamento = (Spinner)findViewById(R.id.spDepartamento);
+		spCiudad= (Spinner)findViewById(R.id.spCiudad);
+		spEstrato= (Spinner)findViewById(R.id.spEstrato);
+		spEstadoObra= (Spinner)findViewById(R.id.spEstadoObra);
+		txtPrecioDesde= (EditText)findViewById(R.id.txtPrecioDesde);
+		txtPrecioHasta=(EditText)findViewById(R.id.txtPrecioHasta);
+	
 		
 	}
 
@@ -44,6 +69,55 @@ public class BusquedaViviendas extends Activity {
 		return super.onOptionsItemSelected(item);
 	}
 
+	public Spinner getSpDepartamento() {
+		return spDepartamento;
+	}
+
+	public void setSpDepartamento(Spinner spDepartamento) {
+		this.spDepartamento = spDepartamento;
+	}
+
+	public Spinner getSpCiudad() {
+		return spCiudad;
+	}
+
+	public void setSpCiudad(Spinner spCiudad) {
+		this.spCiudad = spCiudad;
+	}
+
+	public Spinner getSpEstrato() {
+		return spEstrato;
+	}
+
+	public void setSpEstrato(Spinner spEstrato) {
+		this.spEstrato = spEstrato;
+	}
+
+	public Spinner getSpEstadoObra() {
+		return spEstadoObra;
+	}
+
+	public void setSpEstadoObra(Spinner spEstadoObra) {
+		this.spEstadoObra = spEstadoObra;
+	}
+
+	public EditText getTxtPrecioDesde() {
+		return txtPrecioDesde;
+	}
+
+	public void setTxtPrecioDesde(EditText txtPrecioDesde) {
+		this.txtPrecioDesde = txtPrecioDesde;
+	}
+
+	public EditText getTxtPrecioHasta() {
+		return txtPrecioHasta;
+	}
+
+	public void setTxtPrecioHasta(EditText txtPrecioHasta) {
+		this.txtPrecioHasta = txtPrecioHasta;
+	}
+
+		
 	
 
 }

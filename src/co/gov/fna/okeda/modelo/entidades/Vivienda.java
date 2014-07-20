@@ -53,9 +53,7 @@ public class Vivienda {
     private String nombreProyecto;
     private String partitionKey;
     
-    public Vivienda(String partitionKey){
-    	this.setPartitionKey(partitionKey);
-    }
+ 
 
     public Vivienda(){
     	
