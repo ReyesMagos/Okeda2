@@ -7,30 +7,29 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import co.gov.fna.okeda.persistence.dao.IViviendaDAO;
+import co.gov.fna.okeda.persistence.dao.IPuntoAtencionDAO;
+import co.gov.fna.okeda.persistence.sqlite.contract.PuntoAtencionContract;
 import co.gov.fna.okeda.persistence.sqlite.contract.ViviendaContract;
 import co.gov.fna.okeda.persistencia.sqlite.AccessorSqliteOpenHelper;
 
-/**
- * Created by Alexis-PC on 19/07/2014.
- */
-public class ViviendaDAOImpl implements IViviendaDAO {
-
-	private static final String TAG = ViviendaDAOImpl.class.getSimpleName();
-
-	private static ViviendaDAOImpl instance = null;
+public class PuntoAtencionDAOImpl implements IPuntoAtencionDAO {
+	
+	private static final String TAG = PuntoAtencionDAOImpl.class.getSimpleName();
+	
+	private static PuntoAtencionDAOImpl instance = null;
 	private AccessorSqliteOpenHelper accessorSqliteOpenHelper;
-
-	private ViviendaDAOImpl(Context context) {
+	
+	private PuntoAtencionDAOImpl(Context context){
 		super();
 		this.accessorSqliteOpenHelper = new AccessorSqliteOpenHelper(context);
 	}
-
-	public static synchronized ViviendaDAOImpl getInstance(Context context) {
-		if (instance == null) {
-			instance = new ViviendaDAOImpl(context);
+	
+	public static synchronized PuntoAtencionDAOImpl getInstance(Context context){
+		if(instance == null){
+			instance = new PuntoAtencionDAOImpl(context);
 		}
-		return instance;
+		
+		return (instance);
 	}
 
 	@Override
@@ -56,16 +55,15 @@ public class ViviendaDAOImpl implements IViviendaDAO {
 	}
 
 	@Override
-	public ContentValues save(ContentValues viviendaContentValues) {
-
+	public ContentValues save(ContentValues puntoAtencionContentValues) {
 		try {
 			SQLiteDatabase sqLiteDatabase = accessorSqliteOpenHelper
 					.getReadableDatabase();
 
 			long rowId = sqLiteDatabase.insertWithOnConflict(
-					ViviendaContract.TABLE_NAME, null, viviendaContentValues,
+					PuntoAtencionContract.TABLE_NAME, null, puntoAtencionContentValues,
 					SQLiteDatabase.CONFLICT_IGNORE);
-			return ((rowId != -1L) ? viviendaContentValues : null);
+			return ((rowId != -1L) ? puntoAtencionContentValues : null);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -73,51 +71,21 @@ public class ViviendaDAOImpl implements IViviendaDAO {
 	}
 
 	@Override
-	public ContentValues update(ContentValues viviendaContentValues,
+	public ContentValues update(ContentValues puntoAtencionContentValues,
 			String whereClause, String[] whereArgs) {
 		try {
 			SQLiteDatabase sqLiteDatabase = accessorSqliteOpenHelper
 					.getReadableDatabase();
 			long rowId = sqLiteDatabase.updateWithOnConflict(
-					ViviendaContract.TABLE_NAME, viviendaContentValues,
+					PuntoAtencionContract.TABLE_NAME, puntoAtencionContentValues,
 					whereClause, whereArgs, SQLiteDatabase.CONFLICT_IGNORE);
-			return ((rowId != 0) ? viviendaContentValues : null);
+			return ((rowId != 0) ? puntoAtencionContentValues : null);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return null;
 	}
-
-	private List<ContentValues> cursorToContentValues(Cursor cursor,
-			String[] columns) {
-		List<ContentValues> contentValuesList = new ArrayList<ContentValues>();
-
-		if ((cursor == null) || (cursor.isClosed())) {
-
-			return (contentValuesList);
-		}
-
-		if (columns == null) {
-			columns = ViviendaContract.Column.getAllColumns();
-		}
-
-		ContentValues contentValues = null;
-		cursor.moveToFirst();
-		while (!cursor.isAfterLast()) {
-			contentValues = new ContentValues();
-
-			for (String column : columns) {
-				contentValues.put(column,
-						cursor.getString(cursor.getColumnIndex(column)));
-			}
-
-			contentValuesList.add(contentValues);
-			cursor.moveToNext();
-		}
-
-		return (contentValuesList);
-	}
-
+	
 	private List<ContentValues> convertCursorToEntity(Cursor cursor,
 			String[] columns) {
 		List<ContentValues> contentValuesList = new ArrayList<ContentValues>();
@@ -143,4 +111,5 @@ public class ViviendaDAOImpl implements IViviendaDAO {
 
 		return (contentValuesList);
 	}
+
 }
