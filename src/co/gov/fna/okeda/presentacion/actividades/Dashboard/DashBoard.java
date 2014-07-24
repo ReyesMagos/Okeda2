@@ -12,6 +12,7 @@ import android.widget.GridView;
 import com.example.usuario.tryww.*;
 
 import co.gov.fna.okeda.controladores.ControladorDashBoard;
+import co.gov.fna.okeda.presentacion.actividades.BusquedaPuntoAtencionActivity;
 import co.gov.fna.okeda.presentacion.actividades.BusquedaViviendas;
 
 public class DashBoard extends Activity {
@@ -33,6 +34,11 @@ public class DashBoard extends Activity {
 		Intent i = new Intent(this, BusquedaViviendas.class);
 		startActivity(i);
 	}
+	
+	public void atencion() {
+		Intent myItent = new Intent(this, BusquedaPuntoAtencionActivity.class);
+		startActivity(myItent);
+	}
 
 	public GridView getGridOpciones() {
 		return gridOpciones;
@@ -40,6 +46,16 @@ public class DashBoard extends Activity {
 
 	public void setGridOpciones(GridView gridOpciones) {
 		this.gridOpciones = gridOpciones;
+	}
+	
+	public void getPerfil(){
+		Intent myItent = new Intent(this, PerfilActivity.class);
+		startActivity(myItent);
+	}
+	
+	public void credito(){
+		Intent myItent = new Intent(this, CreditoActivity.class);
+		startActivity(myItent);
 	}
 
 	@Override

@@ -22,5 +22,6 @@
     <string name="title_activity_busqueda_punto_atencion">BusquedaPuntoAtencionActivity</string>
     <string name="title_activity_mapa_activty">MapaActivty</string>
     <string name="title_activity_mapas">MapasAc</string>
+    <string name="title_activity_perfil">PerfilActivity</string>
 
 </resources>

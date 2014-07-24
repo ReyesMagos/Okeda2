@@ -55,5 +55,30 @@ public class ControladorPuntoAtencion {
     public void setActivity(PuntoAtencionActivity acti){
     	this.activity = acti;
     }
+
+	public String[] getUrlSet() {
+		return urlSet;
+	}
+
+	public void setUrlSet(String[] urlSet) {
+		this.urlSet = urlSet;
+	}
+
+	public static ControladorPuntoAtencion getInstance() {
+		return instance;
+	}
+
+	public static void setInstance(ControladorPuntoAtencion instance) {
+		ControladorPuntoAtencion.instance = instance;
+	}
+
+	public PuntoAtencion getPuntoEscogido() {
+		return puntoEscogido;
+	}
+
+	public PuntoAtencionActivity getActivity() {
+		return activity;
+	}
+    
     
 }

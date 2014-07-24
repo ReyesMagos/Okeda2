@@ -1,6 +1,8 @@
 package co.gov.fna.okeda.presentacion.actividades;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -43,6 +45,15 @@ public class PuntoAtencionActivity extends Activity {
 		this.txt5 = (TextView) findViewById(R.id.textView5);
 		this.txt6 = (TextView) findViewById(R.id.textView6);
 		this.txt7 = (TextView) findViewById(R.id.textView7);
+	}
+	
+	public void street(View v){
+		double x =controlador.getPuntoEscogido().getUbicacion().getLatitud();
+		double y=controlador.getPuntoEscogido().getUbicacion().getLonguitud();
+		Uri streetViewUri = Uri.parse(
+                "google.streetview:cbll=" + x+","+y + "&cbp=1,90,,0,1.0&mz=20");
+        Intent streetViewIntent = new Intent(Intent.ACTION_VIEW, streetViewUri);
+        startActivity(streetViewIntent);//
 	}
 
 	@Override

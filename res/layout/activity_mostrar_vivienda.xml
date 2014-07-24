@@ -319,12 +319,29 @@
         android:layout_height="wrap_content"
         android:onClick="comentar"
         android:src="@drawable/ic_launcher" />
+    
+
 
     <ImageView
         android:id="@+id/btnMapa"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="mapaVEr"
+        android:src="@drawable/ic_launcher" />
+    
+     <ImageView
+        android:id="@+id/btnMio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="mapaIntent"
+        android:src="@drawable/ic_launcher" />
+     
+       
+     <ImageView
+        android:id="@+id/btnMail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="formulario"
         android:src="@drawable/ic_launcher" />
     
 

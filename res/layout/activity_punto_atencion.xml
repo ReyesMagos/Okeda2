@@ -73,5 +73,14 @@
         android:layout_below="@+id/textView6"
         android:layout_alignParentLeft="true" />
 
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView7"
+        android:layout_marginTop="42dp"
+        android:onClick="street"
+        android:layout_toRightOf="@+id/textView4"
+        android:src="@drawable/ic_launcher" />
 
 </RelativeLayout>

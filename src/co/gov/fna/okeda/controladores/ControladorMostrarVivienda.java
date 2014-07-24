@@ -55,6 +55,7 @@ public class ControladorMostrarVivienda {
 	}
 
 	public void showViviendaInformation() {
+		Comunicador.setV(vivienda);
 		this.actividad.getTxtNombreProyecto().setText(
 				"Nombre Proyecto: " + vivienda.getNombreProyecto());
 		this.actividad.getTxtClaseDeVivienda().setText(
