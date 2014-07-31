@@ -8,6 +8,7 @@ import org.json.JSONObject;
 
 import android.content.Intent;
 import android.util.Log;
+import co.gov.fna.okeda.interfaces.impl.FactoryUsuario;
 import co.gov.fna.okeda.interfaces.impl.FactoryVivienda;
 import co.gov.fna.okeda.modelo.entidades.Entidades;
 import co.gov.fna.okeda.modelo.entidades.Usuario;
@@ -114,15 +115,15 @@ public class ControladorLoginActivity {
 				if (user != null) {
 					// Hooray! The user is logged in
 					utilidades.cancellDialog();
-					usuario = new Usuario(user);
-					Comunicador.setUser(usuario);
+					FactoryUsuario factoryUsuario = FactoryUsuario
+							.getInstance();
+					factoryUsuario.createUser(user);
 					getActivity().saveSharedPreference(username, pass);
 					getRestFullServices();
-					
-
 				} else {
-					utilidades.showAlertMessage("Error verifique sus datos",
-							"Error");
+					utilidades.showAlertMessage(getActivity().getResources()
+							.getString(R.string.error_datos), getActivity()
+							.getResources().getString(R.string.error));
 
 				}
 				utilidades.cancellDialog();

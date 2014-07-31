@@ -2,6 +2,9 @@ package co.gov.fna.okeda.controladores;
 
 import android.app.Activity;
 import android.graphics.Bitmap;
+import co.gov.fna.okeda.interfaces.impl.FactoryEntidades;
+import co.gov.fna.okeda.interfaces.impl.FactoryVivienda;
+import co.gov.fna.okeda.modelo.entidades.Entidades;
 import co.gov.fna.okeda.modelo.entidades.Vivienda;
 import co.gov.fna.okeda.presentacion.actividades.MostrarVivienda;
 import co.gov.fna.okeda.servicios.ServicioImagenes;
@@ -56,30 +59,34 @@ public class ControladorMostrarVivienda {
 	}
 
 	public void showViviendaInformation() {
-		Comunicador.setV(vivienda);
-		this.actividad.getTxtNombreProyecto().setText(
-				"Nombre Proyecto: " + vivienda.getNombreProyecto());
-		this.actividad.getTxtClaseDeVivienda().setText(
-				"Clase de Vivienda: " + vivienda.getClaseDEVivienda());
-		this.actividad.getTxtDepartamento().setText(
-				"Departamento: " + vivienda.getDepartamento());
-		this.actividad.getTxtCiudad().setText(
-				"Municipio: " + vivienda.getMunicipioCiudad());
-		this.actividad.getTxtEstrato().setText(
-				"Estrato: " + vivienda.getEstrato());
-		this.actividad.getTxtEstadoObra().setText(
-				"Estado Obra: " + vivienda.getEstadoObra());
-		this.actividad.getTxtFechaEntrega().setText(
-				"Fecha Entrega: " + vivienda.getFechaDeEntrega());
-		this.actividad.getTxtValorInmueble().setText(
-				"Valor Inmueble: " + vivienda.getValorInmueble());
-		this.actividad.getTxtCuotaInicial().setText(
-				"Cuota Inicial: " + vivienda.getCuotaInicial());
-		this.actividad.getTxtCuotaMensual().setText(
-				"Cuota Mensual: " + vivienda.getCuotaMensual());
-		this.actividad.getTxtDireccionSalaDeVentas().setText(
-				"Direccion Sala de Ventas: "
-						+ vivienda.getDireccionSalaDeVentas());
+		FactoryEntidades factoryEntidades = FactoryEntidades.getInstance();
+		Entidades e = factoryEntidades.getEntidadInCurrentActivity();
+		if (e instanceof Vivienda) {
+
+			this.actividad.getTxtNombreProyecto().setText(
+					"Nombre Proyecto: " + vivienda.getNombreProyecto());
+			this.actividad.getTxtClaseDeVivienda().setText(
+					"Clase de Vivienda: " + vivienda.getClaseDEVivienda());
+			this.actividad.getTxtDepartamento().setText(
+					"Departamento: " + vivienda.getDepartamento());
+			this.actividad.getTxtCiudad().setText(
+					"Municipio: " + vivienda.getMunicipioCiudad());
+			this.actividad.getTxtEstrato().setText(
+					"Estrato: " + vivienda.getEstrato());
+			this.actividad.getTxtEstadoObra().setText(
+					"Estado Obra: " + vivienda.getEstadoObra());
+			this.actividad.getTxtFechaEntrega().setText(
+					"Fecha Entrega: " + vivienda.getFechaDeEntrega());
+			this.actividad.getTxtValorInmueble().setText(
+					"Valor Inmueble: " + vivienda.getValorInmueble());
+			this.actividad.getTxtCuotaInicial().setText(
+					"Cuota Inicial: " + vivienda.getCuotaInicial());
+			this.actividad.getTxtCuotaMensual().setText(
+					"Cuota Mensual: " + vivienda.getCuotaMensual());
+			this.actividad.getTxtDireccionSalaDeVentas().setText(
+					"Direccion Sala de Ventas: "
+							+ vivienda.getDireccionSalaDeVentas());
+		}
 	}
 
 	public void showMessage(String title, String menssage) {
