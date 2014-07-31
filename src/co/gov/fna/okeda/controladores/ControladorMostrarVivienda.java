@@ -16,7 +16,6 @@ public class ControladorMostrarVivienda {
 
 	private ControladorMostrarVivienda() {
 
-		servicesImagenes = new ServicioImagenes(this);
 	}
 
 	public static ControladorMostrarVivienda getInstace() {
@@ -27,6 +26,8 @@ public class ControladorMostrarVivienda {
 	}
 
 	public void goForImagenes() {
+		servicesImagenes = new ServicioImagenes(getInstace());
+		servicesImagenes.setUrls(vivienda.getUrlImagenes());
 		servicesImagenes.execute();
 	}
 
@@ -109,7 +110,6 @@ public class ControladorMostrarVivienda {
 
 	public void setActividad(MostrarVivienda actividad) {
 		util = new Utilities(actividad);
-		servicesImagenes.setUrls(vivienda.getUrlImagenes());
 		this.actividad = actividad;
 	}
 

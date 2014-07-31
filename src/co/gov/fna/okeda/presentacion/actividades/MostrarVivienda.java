@@ -58,43 +58,58 @@ public class MostrarVivienda extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_mostrar_vivienda);
-		initComponents();
-		controlador = ControladorMostrarVivienda.getInstace();
-		controlador.setActividad(this);
-		controlador.showViviendaInformation();
-		controlador.goForImagenes();
+		if (savedInstanceState == null) {
+			initComponents();
+			controlador = ControladorMostrarVivienda.getInstace();
+			controlador.setActividad(this);
+			controlador.showViviendaInformation();
+			controlador.goForImagenes();
+		}
 	}
-	
-	public void comentar(View v){
+
+	public void comentar(View v) {
 		Intent i = new Intent(this, ComentariosActivity.class);
 		startActivity(i);
-		
+
 	}
-	
-	public void formulario(View v){
+
+	public void formulario(View v) {
 		Intent i = new Intent(this, com.example.usuario.tryww.Formulario.class);
 		startActivity(i);
-		
+
 	}
-	
-	public void mapaIntent(View v){
-		//Intent intent = new Intent(android.content.Intent.ACTION_VIEW, 
-			//    Uri.parse("http://maps.google.com/maps?saddr="+controlador.getVivienda().getUbicacion().getLatitud()+","+controlador.getVivienda().getUbicacion().getLonguitud()+""));
-		Intent intent = new Intent(this, Mapas.class);	
+
+	public void mapaIntent(View v) {
+		// Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
+		// Uri.parse("http://maps.google.com/maps?saddr="+controlador.getVivienda().getUbicacion().getLatitud()+","+controlador.getVivienda().getUbicacion().getLonguitud()+""));
+		Intent intent = new Intent(this, Mapas.class);
 		startActivity(intent);
 	}
-	public void mapaVEr(View v){
-		//Class c= MapaActivity.class;
-		//Intent i = new Intent(this, MapasAc.class);
-		//startActivity(i);
-		double x =controlador.getVivienda().getUbicacion().getLatitud();
-		double y=controlador.getVivienda().getUbicacion().getLonguitud();
-		Uri streetViewUri = Uri.parse(
-                "google.streetview:cbll=" + x+","+y + "&cbp=1,90,,0,1.0&mz=20");
-        Intent streetViewIntent = new Intent(Intent.ACTION_VIEW, streetViewUri);
-        startActivity(streetViewIntent);//
+
+	public void mapaVEr(View v) {
+		// Class c= MapaActivity.class;
+		// Intent i = new Intent(this, MapasAc.class);
+		// startActivity(i);
+		double x = controlador.getVivienda().getUbicacion().getLatitud();
+		double y = controlador.getVivienda().getUbicacion().getLonguitud();
+		Uri streetViewUri = Uri.parse("google.streetview:cbll=" + x + "," + y
+				+ "&cbp=1,90,,0,1.0&mz=20");
+		Intent streetViewIntent = new Intent(Intent.ACTION_VIEW, streetViewUri);
+		startActivity(streetViewIntent);//
 	}
-	
+
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+	}
+
+	@Override
+	protected void onPause() {
+		// TODO Auto-generated method stub
+		super.onPause();
+	}
+
 	public void initComponents() {
 		txtNombreProyecto = (TextView) findViewById(R.id.txtNombreProyecto);
 		txtClaseDeVivienda = (TextView) findViewById(R.id.txtClaseDeVivienda);
