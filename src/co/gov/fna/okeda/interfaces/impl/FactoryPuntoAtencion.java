@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import co.gov.fna.okeda.interfaces.IFactoryPuntoAtencion;
+import co.gov.fna.okeda.modelo.entidades.Entidades;
 import co.gov.fna.okeda.modelo.entidades.PuntoAtencion;
 import co.gov.fna.okeda.modelo.entidades.Ubicacion;
 
@@ -17,7 +18,7 @@ import co.gov.fna.okeda.modelo.entidades.Ubicacion;
 public class FactoryPuntoAtencion implements IFactoryPuntoAtencion {
 
     private static FactoryPuntoAtencion instance;
-    private List<PuntoAtencion> listaPuntosV;
+    private List<Entidades> listaPuntosV;
 
     public FactoryPuntoAtencion() {
     }
@@ -30,7 +31,7 @@ public class FactoryPuntoAtencion implements IFactoryPuntoAtencion {
     }
 
     @Override
-    public List<PuntoAtencion> getPuntoAtencionRest() {
+    public List<Entidades> getPuntoAtencionRest() {
         return listaPuntosV;
     }
 
@@ -41,7 +42,7 @@ public class FactoryPuntoAtencion implements IFactoryPuntoAtencion {
             return;
         }
 
-        listaPuntosV = new ArrayList<PuntoAtencion>();
+        listaPuntosV = new ArrayList<Entidades>();
         JSONObject object;
         try {
             for (int i = 0; i < arreglo.length(); i++){
@@ -75,6 +76,8 @@ public class FactoryPuntoAtencion implements IFactoryPuntoAtencion {
                 j++;
                 p.setNumero(object.getString(arrayPropertiesNames[j]));
                 j++;
+                p.setPartitionKey(object.getString(arrayPropertiesNames[j]));
+                j++;
                 p.setTipoEntidad(object.getString(arrayPropertiesNames[j]));
                 j++;
                 p.setTipoServicioOfrecido(object.getString(arrayPropertiesNames[j]));
@@ -82,9 +85,17 @@ public class FactoryPuntoAtencion implements IFactoryPuntoAtencion {
 
                 listaPuntosV.add(p);
             }
+            setListaPuntos(listaPuntosV);
         }catch (JSONException e) {
             return;
         }
 
     }
+    
+	public void setListaPuntos(List<Entidades> listaViviendas) {
+		this.listaPuntosV = listaViviendas;
+	}
+
+
+
 }

@@ -11,8 +11,6 @@ public class PuntoAtencion extends Entidades {
 	private String numero;
 	private Ubicacion ubicacion;
 	private String direccion;
-	private String departamento;
-	private String municipio;
 	private String horarioAtencion;
 	private String horarioExtendido;
 	private String partitionKey;
@@ -27,8 +25,6 @@ public class PuntoAtencion extends Entidades {
 
 		setNumero(numero);
 		setUbicacion(ubicacion);
-		setDepartamento(departamento);
-		setMunicipio(municipio);
 		setCedulaCodigoBarras(cedulaCodigoBarras);
 	}
 
@@ -73,22 +69,6 @@ public class PuntoAtencion extends Entidades {
 
 	public void setDireccion(String direccion) {
 		this.direccion = direccion;
-	}
-
-	public String getDepartamento() {
-		return departamento;
-	}
-
-	public void setDepartamento(String departamento) {
-		this.departamento = departamento;
-	}
-
-	public String getMunicipio() {
-		return municipio;
-	}
-
-	public void setMunicipio(String municipio) {
-		this.municipio = municipio;
 	}
 
 	public String getHorarioAtencion() {

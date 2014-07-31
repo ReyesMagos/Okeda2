@@ -1,11 +1,12 @@
 package co.gov.fna.okeda.process.impl;
 
-import java.security.PublicKey;
+import java.util.ArrayList;
 import java.util.List;
 
 import android.content.ContentValues;
 import android.content.Context;
-
+import android.graphics.Bitmap;
+import co.gov.fna.okeda.modelo.entidades.Ubicacion;
 import co.gov.fna.okeda.modelo.entidades.Vivienda;
 import co.gov.fna.okeda.persistence.dao.impl.ViviendaDAOImpl;
 import co.gov.fna.okeda.persistence.sqlite.contract.ViviendaContract;
@@ -14,15 +15,14 @@ import co.gov.fna.okeda.process.IViviendaProcess;
 public class ViviendaProcessImpl implements IViviendaProcess {
 
 	private ViviendaDAOImpl viviendaDAOImpl;
-	
-	public ViviendaProcessImpl (Context context){
+
+	public ViviendaProcessImpl(Context context) {
 		super();
-		this.viviendaDAOImpl = ViviendaDAOImpl.getInstance(context)
-;	}
+		this.viviendaDAOImpl = ViviendaDAOImpl.getInstance(context);
+	}
 
 	@Override
-	public Vivienda saveVivienda(Vivienda vivienda) {	
-		
+	public Vivienda saveVivienda(Vivienda vivienda) {
 
 		return ((this.viviendaDAOImpl.save(this
 				.convertViviendaToContentValues(vivienda)) != null) ? vivienda
@@ -37,8 +37,25 @@ public class ViviendaProcessImpl implements IViviendaProcess {
 
 	@Override
 	public List<Vivienda> findAllViviendas() {
-		// TODO Auto-generated method stub
-		return null;
+ 
+		try {
+			List<ContentValues> contentValuesList = this.viviendaDAOImpl
+					.findAll(Boolean.FALSE, ViviendaContract.TABLE_NAME,
+							ViviendaContract.Column.getAllColumns(), null,
+							null, null, null, null, null);
+			List<Vivienda> viviendaslList = new ArrayList<Vivienda>();
+
+			for (ContentValues contentValues : contentValuesList) {
+				viviendaslList.add(this
+						.convertContentValueToVivienda(contentValues));
+			}
+			
+			return viviendaslList;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null; 
+		}
+
 	}
 
 	private ContentValues convertViviendaToContentValues(Vivienda vivienda) {
@@ -60,7 +77,8 @@ public class ViviendaProcessImpl implements IViviendaProcess {
 				vivienda.getCantidadDeInmueblesDisponibles());
 		contentValues.put(ViviendaContract.Column.CARACTERISTICAS_PROYECTO,
 				vivienda.getCaracteristicasProyecto());
-		contentValues.put(ViviendaContract.Column.CIUDAD, vivienda.getMunicipioCiudad());
+		contentValues.put(ViviendaContract.Column.CIUDAD,
+				vivienda.getMunicipioCiudad());
 		contentValues.put(ViviendaContract.Column.CLASE_DE_VIVIENDA,
 				vivienda.getClaseDEVivienda());
 		contentValues.put(ViviendaContract.Column.CREDITO_FNA,
@@ -141,6 +159,107 @@ public class ViviendaProcessImpl implements IViviendaProcess {
 
 		return (contentValues);
 
+	}
+
+	private Vivienda convertContentValueToVivienda(ContentValues contentValues) {
+		Vivienda vivienda = new Vivienda();
+
+		vivienda.setPartitionKey(contentValues
+				.getAsString(ViviendaContract.Column.PARTITION_KEY));
+		vivienda.setAcabado(contentValues
+				.getAsString(ViviendaContract.Column.ACABADOS));
+		vivienda.setAplicaSubsidio(contentValues
+				.getAsString(ViviendaContract.Column.APLICA_SUBSIDIO));
+		vivienda.setAreaDesde(contentValues
+				.getAsString(ViviendaContract.Column.AREA_DESDE));
+		vivienda.setAreHasta(contentValues
+				.getAsString(ViviendaContract.Column.AREA_HASTA));
+		vivienda.setBarrio(contentValues
+				.getAsString(ViviendaContract.Column.BARRIO));
+		vivienda.setCantidadDeInmueblesDisponibles(contentValues
+				.getAsString(ViviendaContract.Column.CANTIDADDE_INMUEBLES_DISPONIBLES));
+		vivienda.setCaracteristicasProyecto(contentValues
+				.getAsString(ViviendaContract.Column.CARACTERISTICAS_PROYECTO));
+		vivienda.setClaseDEVivienda(contentValues
+				.getAsString(ViviendaContract.Column.CLASE_DE_VIVIENDA));
+		vivienda.setCreditoFna(contentValues
+				.getAsString(ViviendaContract.Column.CREDITO_FNA));
+		vivienda.setCuotaInicial(contentValues
+				.getAsString(ViviendaContract.Column.CUOTA_INICIAL));
+		vivienda.setCuotaMensual(contentValues
+				.getAsString(ViviendaContract.Column.CUOTA_MENSUAL));
+		vivienda.setDepartamento(contentValues
+				.getAsString(ViviendaContract.Column.DEPARTAMENTO));
+		vivienda.setDiaDeAtencionDesde(contentValues
+				.getAsString(ViviendaContract.Column.DIA_DE_ATENCION_DESDE));
+		vivienda.setDiaDeAtencionHasta(contentValues
+				.getAsString(ViviendaContract.Column.DIA_DE_ATENCION_HASTA));
+		vivienda.setDireccionProyecto(contentValues
+				.getAsString(ViviendaContract.Column.DIRECCION_PROYECTO));
+		vivienda.setDireccionSalaDeVentas(contentValues
+				.getAsString(ViviendaContract.Column.DIRECCION_SALA_DE_VENTAS));
+		vivienda.setDireccionSedePrincipalConstructora(contentValues
+				.getAsString(ViviendaContract.Column.DIRECCION_SEDE_PRINCIPAL_CONSTRUCTORA));
+		vivienda.setEmailConstructora(contentValues
+				.getAsString(ViviendaContract.Column.EMAIL_CONSTRUCTORA));
+		vivienda.setEstadoObra(contentValues
+				.getAsString(ViviendaContract.Column.ESTADO_OBRA));
+		vivienda.setFechaDeEntrega(contentValues
+				.getAsString(ViviendaContract.Column.FECHA_DE_ENTREGA));
+		vivienda.setHoraDeAtencionDesde(contentValues
+				.getAsString(ViviendaContract.Column.HORARIO_DE_ATENCION_DESDE));
+		vivienda.setHoraDeAtencionHasta(contentValues
+				.getAsString(ViviendaContract.Column.HORA_DE_ATENCION_HASTA));
+		List<String> urlImagenes = new ArrayList<String>();
+		urlImagenes.set(0, contentValues
+				.getAsString(ViviendaContract.Column.IMAGEN_PRINCIPAL));
+		urlImagenes.set(1,
+				contentValues.getAsString(ViviendaContract.Column.IMAGEN1));
+		urlImagenes.set(2,
+				contentValues.getAsString(ViviendaContract.Column.IMAGEN2));
+		urlImagenes.set(3,
+				contentValues.getAsString(ViviendaContract.Column.IMAGEN3));
+		urlImagenes.set(4,
+				contentValues.getAsString(ViviendaContract.Column.IMAGEN4));
+		urlImagenes.set(5,
+				contentValues.getAsString(ViviendaContract.Column.IMAGEN5));
+		vivienda.setUrlImagenes(urlImagenes);
+		vivienda.setLocalidadoZona(contentValues
+				.getAsString(ViviendaContract.Column.LOCALIDAD_O_ZONA));
+		vivienda.setNitConstructora(contentValues
+				.getAsString(ViviendaContract.Column.NIT_CONSTRUCTORA));
+		vivienda.setNombreConstructora(contentValues
+				.getAsString(ViviendaContract.Column.NOMBRE_CONSTRUCTORA));
+		vivienda.setNombreContactoConstructora(contentValues
+				.getAsString(ViviendaContract.Column.NOMBRE_CONTACTO_CONSTRUCTORA));
+		vivienda.setNombreContatoSalaDeVentas(contentValues
+				.getAsString(ViviendaContract.Column.NOMBRE_CONTACTO_SALA_DE_VENTA));
+		vivienda.setNombreProyecto(contentValues
+				.getAsString(ViviendaContract.Column.NOMBRE_PROYECTO));
+		vivienda.setNombreRepresentanteLegalConstructora(contentValues
+				.getAsString(ViviendaContract.Column.NOMBRE_REPRESENTANTE_LEGAL_CONSTRUCTORA));
+		vivienda.setPrecioDesde(contentValues
+				.getAsString(ViviendaContract.Column.PRECIO_DESDE));
+		vivienda.setPrecioHasta(contentValues
+				.getAsString(ViviendaContract.Column.PRECIO_HASTA));
+		vivienda.setTelefonoCelularSalaDeVentas(contentValues
+				.getAsString(ViviendaContract.Column.TELEFONO_CELULAR_SALA_DE_VENTAS));
+		vivienda.setTelefonoContactContructora(contentValues
+				.getAsString(ViviendaContract.Column.TELEFONO_CONTACTO_CONSTRUCTORA));
+		vivienda.setTelefonoFijoSalaDeVentas(contentValues
+				.getAsString(ViviendaContract.Column.TELEFONO_FIJO_SALA_DE_VENTAS));
+		vivienda.setTipoInmuebleOfrecido(contentValues
+				.getAsString(ViviendaContract.Column.TIPO_DE_INMUEBLE_OFRECIDO));
+		Ubicacion ubicacion = null;
+		ubicacion.setLatitud(contentValues
+				.getAsDouble(ViviendaContract.Column.LATITUD));
+		ubicacion.setLonguitud(contentValues
+				.getAsDouble(ViviendaContract.Column.LONGITUD));
+		vivienda.setUbicacion(ubicacion);
+		vivienda.setValorInmueble(contentValues
+				.getAsString(ViviendaContract.Column.VALOR_INMUBLE));
+
+		return (vivienda);
 	}
 
 }

@@ -18,7 +18,7 @@ public class ViviendaContract extends PersistanceContract {
 		public static final String AREA_DESDE = "area_desde";
 		public static final String AREA_HASTA = "area_hasta";
 		public static final String BARRIO = "barrio";
-		public static final String CANTIDADDE_INMUEBLES_DISPONIBLES = "cantidad_inmuebles-disponibles";
+		public static final String CANTIDADDE_INMUEBLES_DISPONIBLES = "cantidad_inmuebles_disponibles";
 		public static final String CARACTERISTICAS_PROYECTO = "caracteristicas_proyecto";
 		public static final String CLASE_DE_VIVIENDA = "clase_de_vivienda";
 		public static final String CREDITO_FNA = "credito_fna";
@@ -46,7 +46,7 @@ public class ViviendaContract extends PersistanceContract {
 		public static final String LOCALIDAD_O_ZONA = "localidad_o_zona";
 		public static final String LONGITUD = "longitud";
 		public static final String NIT_CONSTRUCTORA = "nit_constructora";
-		public static final String NOMBRE_CONTACTO_CONSTRUCTORA = "nombre_constructora";
+		public static final String NOMBRE_CONTACTO_CONSTRUCTORA = "nombre_contacto_constructora";
 		public static final String NOMBRE_CONTACTO_SALA_DE_VENTA = "nombre_contacto_sala_de_venta";
 		public static final String NOMBRE_CONSTRUCTORA = "nombre_constructora";
 		public static final String NOMBRE_PROYECTO = "nombre_proyecto";

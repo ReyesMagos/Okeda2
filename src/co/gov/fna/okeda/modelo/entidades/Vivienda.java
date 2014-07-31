@@ -58,6 +58,10 @@ public class Vivienda extends Entidades {
 		// TODO Auto-generated constructor stub
 	}
 
+	
+    public Vivienda(String partitionKey){
+    	this.setPartitionKey(partitionKey);
+    }
 
  
     

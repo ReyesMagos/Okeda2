@@ -60,7 +60,7 @@ public class ViviendaDAOImpl implements IViviendaDAO {
 
 		try {
 			SQLiteDatabase sqLiteDatabase = accessorSqliteOpenHelper
-					.getReadableDatabase();
+					.getWritableDatabase();
 
 			long rowId = sqLiteDatabase.insertWithOnConflict(
 					ViviendaContract.TABLE_NAME, null, viviendaContentValues,
@@ -68,8 +68,9 @@ public class ViviendaDAOImpl implements IViviendaDAO {
 			return ((rowId != -1L) ? viviendaContentValues : null);
 		} catch (Exception e) {
 			e.printStackTrace();
+			return null; 
 		}
-		return null;
+		//return null;
 	}
 
 	@Override
@@ -77,7 +78,7 @@ public class ViviendaDAOImpl implements IViviendaDAO {
 			String whereClause, String[] whereArgs) {
 		try {
 			SQLiteDatabase sqLiteDatabase = accessorSqliteOpenHelper
-					.getReadableDatabase();
+					.getWritableDatabase();
 			long rowId = sqLiteDatabase.updateWithOnConflict(
 					ViviendaContract.TABLE_NAME, viviendaContentValues,
 					whereClause, whereArgs, SQLiteDatabase.CONFLICT_IGNORE);
