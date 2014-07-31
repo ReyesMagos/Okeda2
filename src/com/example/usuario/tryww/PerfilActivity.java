@@ -19,7 +19,6 @@ public class PerfilActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.user_perfil);
 		FactoryUsuario factoryUsuario = FactoryUsuario.getInstance();
-		
 		Usuario u = factoryUsuario.getCurrentUserInActivity();
 		txtEmail = (TextView) findViewById(R.id.txtEmail);
 		text_view_user_name = (TextView) findViewById(R.id.text_view_user_name);

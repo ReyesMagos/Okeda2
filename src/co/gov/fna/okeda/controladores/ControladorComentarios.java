@@ -44,6 +44,7 @@ public class ControladorComentarios {
 		Entidades e = factoryEntidades.getEntidadInCurrentActivity();
 		if (e instanceof Vivienda) {
 			FactoryUsuario factoryUsuario = FactoryUsuario.getInstance();
+
 			Vivienda v = (Vivienda) e;
 			Usuario u = factoryUsuario.getCurrentUserInActivity();
 			ParseObject comentario = new ParseObject("Comentario");
@@ -52,6 +53,7 @@ public class ControladorComentarios {
 			comentario.put("vivienda", v.getPartitionKey());
 			comentario.put("user", u.getUser().getUsername());
 			comentario.put("puntuacion", Puntuacion);
+			comentario.put("id", v.getPartitionKey());
 			comentario.saveInBackground();
 			util.showAlertMessage("Comentario Enviado Correctamente", "Exito");
 		}
@@ -67,16 +69,24 @@ public class ControladorComentarios {
 	}
 
 	public void MuestraComentarios() {
-		String[] x = new String[listaObjetos.size()];
-		int i = 0;
-		for (ParseObject p : listaObjetos) {
-			x[i] = p.getString("mensaje") + "; " + p.getString("user");
-			i++;
+		FactoryEntidades factoryEntidades = FactoryEntidades.getInstance();
+		Entidades e = factoryEntidades.getEntidadInCurrentActivity();
+		if (e instanceof Vivienda) {
+			Vivienda v = (Vivienda) e;
 
+			String[] x = new String[listaObjetos.size()];
+			int i = 0;
+			for (ParseObject p : listaObjetos) {
+				if (p.getString("partition").equals(v.getPartitionKey())) {
+					x[i] = p.getString("mensaje") + "; " + p.getString("user");
+					i++;
+				}
+
+			}
+			Adapter ada = new ArrayAdapter<String>(activity,
+					R.layout.simple_list_item_1, x);
+			activity.getLv().setAdapter((ListAdapter) ada);
 		}
-		Adapter ada = new ArrayAdapter<String>(activity,
-				R.layout.simple_list_item_1, x);
-		activity.getLv().setAdapter((ListAdapter) ada);
 
 	}
 
