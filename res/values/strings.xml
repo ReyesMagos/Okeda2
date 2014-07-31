@@ -23,5 +23,18 @@
     <string name="title_activity_mapa_activty">MapaActivty</string>
     <string name="title_activity_mapas">MapasAc</string>
     <string name="title_activity_perfil">PerfilActivity</string>
+    <string name="title_activity_mapa">Mapa</string>
+    <string name="user_name">Usuario</string>
+    <string name="password">Contrasena</string>
+    <string name="email">Email</string>
+    <string name="telefono">Telefono</string>
+    <string name="error_datos">Verifique Los Datos Por Favor</string>
+    <string name="error">Error</string>
+    <string name="alerta">Alerta</string>
+    <string name="mensaje_registrando">Registrando Espere Por Favor</string>
+    <string name="mensaje_registro_exitoso">Registro Exitoso</string>
+    <string name="exito">Exito</string>
+    <string name="title_activity_preference">PreferenceActivity</string>
+    <string name="title_activity_preference_activity_main">PreferenceActivityMain</string>
 
 </resources>

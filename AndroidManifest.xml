@@ -6,7 +6,7 @@
 
     <uses-sdk
         android:maxSdkVersion="18"
-        android:minSdkVersion="11"
+        android:minSdkVersion="16"
         android:targetSdkVersion="16" />
 
     <permission
@@ -63,7 +63,7 @@
             android:label="@string/title_activity_busqueda_viviendas" >
         </activity>
         <activity
-            android:name="com.example.usuario.tryww.BusquedaViviendas"
+            android:name=".BusquedaViviendas"
             android:label="@string/title_activity_busqueda_viviendas" >
         </activity>
         <activity
@@ -87,21 +87,32 @@
             android:label="@string/title_activity_mapa_activty" >
         </activity>
         <activity
-            android:name="com.example.usuario.tryww.MapasAc"
+            android:name=".MapasAc"
             android:label="@string/title_activity_mapas" >
         </activity>
         <activity
-            android:name="com.example.usuario.tryww.PerfilActivity"
+            android:name=".PerfilActivity"
             android:label="@string/title_activity_perfil" >
         </activity>
-        
         <activity
-            android:name="com.example.usuario.tryww.Formulario"
+            android:name=".Formulario"
             android:label="Formulario" >
         </activity>
         <activity
-            android:name="com.example.usuario.tryww.CreditoActivity"
+            android:name=".CreditoActivity"
             android:label="Credito" >
+        </activity>
+        <activity
+            android:name="co.gov.fna.okeda.presentacion.actividades.Mapas"
+            android:label="@string/title_activity_mapas" >
+        </activity>
+        <activity
+            android:name="co.gov.fna.okeda.presentacion.actividades.preference.PreferenceActivityFragment"
+            android:label="@string/title_activity_preference" >
+        </activity>
+        <activity
+            android:name=".PreferenceActivityMain"
+            android:label="@string/title_activity_preference_activity_main" >
         </activity>
     </application>
 

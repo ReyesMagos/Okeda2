@@ -1,6 +1,5 @@
 package co.gov.fna.okeda.presentacion.actividades;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
@@ -30,16 +29,17 @@ public class BusquedaPuntoAtencionActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_busqueda_punto_atencion);
 			initComponents();
-			controlador= ControladorBusquedaPuntoAtencion.getInstace();
-			controlador.setActivity(this);
-			controlador.setUrlSet(this.getResources().getStringArray(R.array.urlset));
-			controlador.getRestFullServices();
-			//controlador.setListToSpinner();
+		
+			
 			
 		
 	}
 
 	private void initComponents() {
+		this.controlador= ControladorBusquedaPuntoAtencion.getInstace();
+		this.controlador.setActivity(this);
+		this.controlador.setUrlSet(this.getResources().getStringArray(R.array.urlset));
+		this.controlador.getRestFullServices();
 		this.spDepartamento = (Spinner)findViewById(R.id.spDepartamentoA);
 		this.spMuni= (Spinner)findViewById(R.id.spMuniA);
 		this.spCosto= (Spinner)findViewById(R.id.spCostoA);

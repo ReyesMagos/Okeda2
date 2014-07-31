@@ -1,19 +1,20 @@
 package co.gov.fna.okeda.presentacion.actividades;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
-
 import com.parse.Parse;
-import com.parse.ParseAnalytics;
+import com.example.usuario.tryww.PreferenceActivityMain;
 import com.example.usuario.tryww.R;
 
 import co.gov.fna.okeda.controladores.ControladorLoginActivity;
@@ -22,14 +23,18 @@ import co.gov.fna.okeda.presentacion.actividades.Dashboard.DashBoard;
 
 public class LoginActitvity extends Activity {
 	private ControladorLoginActivity controlador;
-	ViviendaDAOImpl viviendaDAOImpl;
-	EditText txtUser;
-	EditText Password;
+	private ViviendaDAOImpl viviendaDAOImpl;
+	private EditText txtUser;
+	private EditText Password;
+	private ActionBar action;
+	private SharedPreferences sharedPreferences;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+
 		setContentView(R.layout.activity_main);
+		action = getActionBar();
 		controlador = new ControladorLoginActivity(this);
 		Parse.initialize(this, getResources().getString(R.string.parseid),
 				getResources().getString(R.string.parseid2));
@@ -37,20 +42,27 @@ public class LoginActitvity extends Activity {
 			this.viviendaDAOImpl = ViviendaDAOImpl.getInstance(super
 					.getApplicationContext());
 		}
+		sharedPreferences = PreferenceManager
+				.getDefaultSharedPreferences(getApplicationContext());
+		String username = sharedPreferences.getString("username", "NAN");
+		String password = sharedPreferences.getString("password", "NAN");
+
 		txtUser = (EditText) findViewById(R.id.txtUsername);
 		Password = (EditText) findViewById(R.id.txtPassword);
-
+		if (!username.equals("NAN"))
+			txtUser.setText(username);
+		if (!password.equals("NAN"))
+			Password.setText(password);
 	}
 
 	public void getServices(View v) {
-		controlador.setGoingForViviendasSet(true);
 		controlador.getRestFullServices();
 	}
 
 	public void singUp(View v) {
 		final Dialog dialog = new Dialog(this);
 		dialog.setContentView(R.layout.sing_up_dialog);
-		dialog.setTitle("Title...");
+		dialog.setTitle("Registro");
 
 		// set the custom dialog components - text, image and button
 		final EditText txtUserName = (EditText) dialog
@@ -77,8 +89,9 @@ public class LoginActitvity extends Activity {
 						&& mobile != null && mobile.length() > 5) {
 					controlador.singUp(username, password, email, mobile);
 				} else {
-					controlador.showMessage("Alerta",
-							"Por Favor Verifique los Datos");
+					controlador.showMessage(
+							getResources().getString(R.string.error),
+							getResources().getString(R.string.error_datos));
 				}
 				dialog.dismiss();
 			}
@@ -93,6 +106,18 @@ public class LoginActitvity extends Activity {
 
 		dialog.show();
 
+	}
+
+	public void saveSharedPreference(String username, String password) {
+
+		SharedPreferences.Editor editor = sharedPreferences.edit();
+		editor.putString("username", username);
+		editor.putString("password", password);
+		boolean x = editor.commit();
+		String username1 = sharedPreferences.getString("username", "NAN");
+		String password2 = sharedPreferences.getString("password", "NAN");
+		Log.i("Keys",
+				String.format("Username %s,pasword %s  ", username1, password2));
 	}
 
 	public void openDashBoar(View v) {
@@ -132,10 +157,15 @@ public class LoginActitvity extends Activity {
 		// Handle action bar item clicks here. The action bar will
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
-		if (id == R.id.action_settings) {
+		switch (item.getItemId()) {
+		case R.id.action_search:
+			Intent i = new Intent(this, PreferenceActivityMain.class);
+			startActivity(i);
 			return true;
+
+		default:
+			return super.onOptionsItemSelected(item);
+
 		}
-		return super.onOptionsItemSelected(item);
 	}
 }

@@ -25,11 +25,10 @@ import com.parse.ParseUser;
 import com.parse.SignUpCallback;
 
 /**
- * Created by usuario on 18/07/14.
+ * Created by OscarGallon on 18/07/14.
  */
 public class ControladorLoginActivity {
 
-	private boolean isGoingForViviendasSet;
 	private LoginActitvity activity;
 	private String[] urlSet;
 	private Usuario usuario;
@@ -42,31 +41,19 @@ public class ControladorLoginActivity {
 	}
 
 	public void procesaRespuestaRestFul(JSONObject objeto) {
-		if (isGoingForViviendasSet) {
-			try {
-				String[] viviendaPropertysNames = activity.getResources()
-						.getStringArray(R.array.viviendas_properties_names);
-				JSONArray arregloJSON = objeto.getJSONArray("d");
-				FactoryVivienda factory = FactoryVivienda.getInstance();
-				factory.fillViviendas(arregloJSON, viviendaPropertysNames);
-				this.saveViviendaIntoDatabase(factory.getListaViviendas());
-				this.activity.changeToActivy(DashBoard.class);
-			} catch (JSONException e) {
 
-			}
+		try {
+			String[] viviendaPropertysNames = activity.getResources()
+					.getStringArray(R.array.viviendas_properties_names);
+			JSONArray arregloJSON = objeto.getJSONArray("d");
+			FactoryVivienda factory = FactoryVivienda.getInstance();
+			factory.fillViviendas(arregloJSON, viviendaPropertysNames);
+			this.saveViviendaIntoDatabase(factory.getListaViviendas());
+			this.activity.changeToActivy(DashBoard.class);
+		} catch (JSONException e) {
+
 		}
 
-		// }else{
-		// try{
-		// String[] puntosPropertysNames =
-		// activity.getResources().getStringArray(R.array.puntosatencion_properties_names);
-		// JSONArray arregloJSON = objeto.getJSONArray("d");
-		// FactoryPuntoAtencion factory = FactoryPuntoAtencion.getInstance();
-		// factory.fillPuntoAtencion(arregloJSON, puntosPropertysNames);
-		// }catch(JSONException e){
-		//
-		// }
-		// }
 	}
 
 	public void changeToActivy(Class a) {
@@ -82,7 +69,10 @@ public class ControladorLoginActivity {
 	public void singUp(String userName, String password, String email,
 			String mobile) {
 		final Utilities utilidades = new Utilities(activity);
-		utilidades.showDialog("Alerta", "Registrando  Espere por Favor", false);
+		utilidades.showDialog(
+				getActivity().getResources().getString(R.string.alerta),
+				getActivity().getResources().getString(
+						R.string.mensaje_registrando), false);
 		ParseUser user = new ParseUser();
 		user.setUsername(userName);
 		user.setPassword(password);
@@ -93,26 +83,31 @@ public class ControladorLoginActivity {
 			public void done(ParseException e) {
 				if (e == null) {
 					utilidades.cancellDialog();
-					utilidades.showAlertMessage("Registro Exitoso", "Exito");
+					utilidades.showAlertMessage(
+							getActivity().getResources().getString(
+									R.string.mensaje_registro_exitoso),
+							getActivity().getResources().getString(
+									R.string.exito));
 
 				} else {
 					// Sign up didn't succeed. Look at the ParseException
 					// to figure out what went wrong
 					Log.i("error", e.getMessage());
-					utilidades.showAlertMessage("Error verifique sus datos",
-							"Error");
+					utilidades.showAlertMessage(getActivity().getResources()
+							.getString(R.string.error_datos), getActivity()
+							.getResources().getString(R.string.error));
 				}
 			}
 		});
 
 	}
 
-	public void loggin(String user, String pass) {
+	public void loggin(final String username, final String pass) {
 		final Utilities utilidades = new Utilities(activity);
-		utilidades.showDialog("Alerta", "iniciando Session Espere por Favor",
-				false);
+		utilidades.showDialog(getActivity().getString(R.string.alerta),
+				"iniciando Session Espere por Favor", false);
 
-		ParseUser.logInInBackground(user, pass, new LogInCallback() {
+		ParseUser.logInInBackground(username, pass, new LogInCallback() {
 
 			public void done(ParseUser user, ParseException e) {
 
@@ -121,14 +116,14 @@ public class ControladorLoginActivity {
 					utilidades.cancellDialog();
 					usuario = new Usuario(user);
 					Comunicador.setUser(usuario);
-					utilidades.showAlertMessage("Inicio Exitoso", "Exito");
-					setGoingForViviendasSet(true);
+					getActivity().saveSharedPreference(username, pass);
 					getRestFullServices();
+					
 
 				} else {
 					utilidades.showAlertMessage("Error verifique sus datos",
 							"Error");
-					
+
 				}
 				utilidades.cancellDialog();
 			}
@@ -138,22 +133,9 @@ public class ControladorLoginActivity {
 
 	public void getRestFullServices() {
 		GetRestServices services;
-		if (isGoingForViviendasSet) {
-			services = new GetRestServices(getUrlSet()[0], getActivity());
-		} else {
-			services = new GetRestServices(getUrlSet()[1], getActivity());
-		}
-		this.isGoingForViviendasSet = true;
+		services = new GetRestServices(getUrlSet()[0], getActivity());
 		services.execute();
 
-	}
-
-	public boolean isGoingForViviendasSet() {
-		return isGoingForViviendasSet;
-	}
-
-	public void setGoingForViviendasSet(boolean isGoingForViviendasSet) {
-		this.isGoingForViviendasSet = isGoingForViviendasSet;
 	}
 
 	public LoginActitvity getActivity() {

@@ -30,12 +30,12 @@ public class DashBoard extends Activity {
 
 	}
 
-	public void openBusquedaViviendas() {
+	public void changeToBusquedaViviendasActivity() {
 		Intent i = new Intent(this, BusquedaViviendas.class);
 		startActivity(i);
 	}
 	
-	public void atencion() {
+	public void changeToBusquedaPuntoAtencionActivity() {
 		Intent myItent = new Intent(this, BusquedaPuntoAtencionActivity.class);
 		startActivity(myItent);
 	}
@@ -48,12 +48,12 @@ public class DashBoard extends Activity {
 		this.gridOpciones = gridOpciones;
 	}
 	
-	public void getPerfil(){
+	public void changeToPerfilActivity(){
 		Intent myItent = new Intent(this, PerfilActivity.class);
 		startActivity(myItent);
 	}
 	
-	public void credito(){
+	public void changeToCreditoActivity(){
 		Intent myItent = new Intent(this, CreditoActivity.class);
 		startActivity(myItent);
 	}

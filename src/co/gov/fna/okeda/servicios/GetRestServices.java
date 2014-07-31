@@ -40,8 +40,7 @@ public class GetRestServices extends AsyncTask<String, String, String> {
 		if (activity instanceof LoginActitvity) {
 			this.controladorLogin = new ControladorLoginActivity(
 					(LoginActitvity) activity);
-			controladorLogin.setGoingForViviendasSet(true);
-			controladorPuntoAtencion=null;
+			controladorPuntoAtencion = null;
 		} else if (activity instanceof BusquedaPuntoAtencionActivity) {
 			this.controladorPuntoAtencion = ControladorBusquedaPuntoAtencion
 					.getInstace();

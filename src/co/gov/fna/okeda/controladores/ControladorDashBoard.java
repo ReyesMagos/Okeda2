@@ -50,17 +50,17 @@ public class ControladorDashBoard {
 					public void onItemClick(AdapterView<?> arg0, View arg1,
 							int arg2, long arg3) {
 						if (arg2 == 0) {
-							activity.getPerfil();
+							activity.changeToPerfilActivity();
 						} else if (arg2 == 1) {
 
-							activity.openBusquedaViviendas();
+							activity.changeToBusquedaViviendasActivity();
 						} else if (arg2 == 2) {
 
-							activity.atencion();
+							activity.changeToBusquedaPuntoAtencionActivity();
 						}
 						 else if (arg2 == 3) {
 
-								activity.credito();
+								activity.changeToCreditoActivity();
 							}
 						// TODO Auto-generated method stub
 

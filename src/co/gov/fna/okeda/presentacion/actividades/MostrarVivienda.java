@@ -78,9 +78,10 @@ public class MostrarVivienda extends Activity {
 	}
 	
 	public void mapaIntent(View v){
-		Intent intent = new Intent(android.content.Intent.ACTION_VIEW, 
-			    Uri.parse("http://maps.google.com/maps?saddr="+controlador.getVivienda().getUbicacion().getLatitud()+","+controlador.getVivienda().getUbicacion().getLonguitud()+""));
-			startActivity(intent);
+		//Intent intent = new Intent(android.content.Intent.ACTION_VIEW, 
+			//    Uri.parse("http://maps.google.com/maps?saddr="+controlador.getVivienda().getUbicacion().getLatitud()+","+controlador.getVivienda().getUbicacion().getLonguitud()+""));
+		Intent intent = new Intent(this, Mapas.class);	
+		startActivity(intent);
 	}
 	public void mapaVEr(View v){
 		//Class c= MapaActivity.class;
