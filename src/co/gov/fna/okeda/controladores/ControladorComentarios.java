@@ -75,7 +75,7 @@ public class ControladorComentarios {
 
 		final Usuario u = factoryUsuario.getCurrentUserInActivity();
 
-		SaveCallback comentarioSavedCallBack = new SaveCallback() {
+		final SaveCallback comentarioSavedCallBack = new SaveCallback() {
 
 			@Override
 			public void done(ParseException arg0) {
@@ -96,7 +96,7 @@ public class ControladorComentarios {
 					comentario.put("vivienda", vivienda);
 					comentario.put("usuario", u.getUser());
 					comentario.put("puntuacion", Puntuacion);
-					comentario.saveInBackground();
+					comentario.saveInBackground(comentarioSavedCallBack);
 					util.showAlertMessage("Comentario Enviado Correctamente",
 							"Exito");
 				}

@@ -16,8 +16,11 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.FragmentManager;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -25,21 +28,22 @@ import android.view.MenuItem;
 
 public class Mapas extends Activity {
 	GoogleMap mapa;
+	ActionBar actionBar;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		actionBar = getActionBar();
 		setContentView(R.layout.mapas_layout);
 		mapa = ((MapFragment) getFragmentManager().findFragmentById(R.id.map))
 				.getMap();
 		if (mapa != null) {
 			Log.i("PERRA", "WE HAD MAP");
 			FactoryEntidades factoryEntidades = FactoryEntidades.getInstance();
-			ubicarEscenario(factoryEntidades.getEntidadInCurrentActivity(),12);
+			ubicarEscenario(factoryEntidades.getEntidadInCurrentActivity(), 12);
 		} else {
 			Log.i("PERRA", "NO MAPP");
 		}
-		
 
 	}
 
@@ -90,11 +94,23 @@ public class Mapas extends Activity {
 		// Handle action bar item clicks here. The action bar will
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
-		if (id == R.id.action_settings) {
+		switch (item.getItemId()) {
+		case R.id.streetView:
+			FactoryEntidades factoryEntidades = FactoryEntidades.getInstance();
+			Entidades e = factoryEntidades.getEntidadInCurrentActivity();
+			Uri streetViewUri = Uri.parse("google.streetview:cbll="
+					+ e.getUbicacion().getLatitud() + ","
+					+ e.getUbicacion().getLonguitud()
+					+ "&cbp=1,90,,0,1.0&mz=20");
+			Intent streetViewIntent = new Intent(Intent.ACTION_VIEW,
+					streetViewUri);
+			startActivity(streetViewIntent);
 			return true;
+
+		default:
+			return super.onOptionsItemSelected(item);
+
 		}
-		return super.onOptionsItemSelected(item);
 	}
 
 }
