@@ -2,7 +2,10 @@ package co.gov.fna.okeda.presentacion.actividades;
 
 import co.gov.fna.okeda.controladores.ControladorComentarios;
 import co.gov.fna.okeda.controladores.ControladorMostrarVivienda;
-
+import co.gov.fna.okeda.interfaces.impl.FactoryEntidades;
+import co.gov.fna.okeda.modelo.entidades.Entidades;
+import co.gov.fna.okeda.modelo.entidades.Vivienda;
+import co.gov.fna.okeda.utilidades.SocialNetwork;
 
 import com.example.usuario.tryww.Mapas;
 import com.example.usuario.tryww.R;
@@ -28,6 +31,7 @@ import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
 import android.os.Build;
@@ -54,6 +58,7 @@ public class MostrarVivienda extends Activity {
 	private ImageView im5;
 	private ImageView im6;
 	private ViewFlipper viewFlipper;
+	private RatingBar rating;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -124,6 +129,8 @@ public class MostrarVivienda extends Activity {
 		txtCuotaMensual = (TextView) findViewById(R.id.txtCuotaMensual);
 		txtDireccionSalaDeVentas = (TextView) findViewById(R.id.txtDireccionSalaDeVentas);
 		viewFlipper = (ViewFlipper) findViewById(R.id.flipper2);
+		rating = (RatingBar) findViewById(R.id.ratingBar1);
+		rating.setEnabled(false);
 		im1 = (ImageView) findViewById(R.id.imv1);
 		im2 = (ImageView) findViewById(R.id.imv2);
 		im3 = (ImageView) findViewById(R.id.imv3);
@@ -177,6 +184,16 @@ public class MostrarVivienda extends Activity {
 
 	public void setTxtCiudad(TextView txtCiudad) {
 		this.txtCiudad = txtCiudad;
+	}
+	
+	
+
+	public RatingBar getRating() {
+		return rating;
+	}
+
+	public void setRating(RatingBar rating) {
+		this.rating = rating;
 	}
 
 	public TextView getTxtEstrato() {
@@ -471,6 +488,23 @@ public class MostrarVivienda extends Activity {
 		outtoRight.setDuration(500);
 		outtoRight.setInterpolator(new AccelerateInterpolator());
 		return outtoRight;
+	}
+
+	public void shareOnSocialNetwork(View view) {
+		SocialNetwork socialNetwork = new SocialNetwork();
+		FactoryEntidades factoryEntidades = FactoryEntidades.getInstance();
+		Entidades e = factoryEntidades.getEntidadInCurrentActivity();
+		if (e instanceof Vivienda) {
+			Vivienda vivienda = (Vivienda) e;
+			String viviendaMostrar = "Me interesa esta vivienda: "
+					+ vivienda.getNombreProyecto() + "\n"
+					+ vivienda.getClaseDEVivienda() + "Valor del inmueble: "
+					+ "\n" + vivienda.getValorInmueble()
+					+ "Dirección sala de ventas: "
+					+ vivienda.getDireccionSalaDeVentas();
+
+			socialNetwork.compartirRedSocial(this, viviendaMostrar);
+		}
 	}
 
 }

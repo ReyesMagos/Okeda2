@@ -7,6 +7,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.RatingBar;
 import co.gov.fna.okeda.controladores.ControladorComentarios;
 
 import com.example.usuario.tryww.R;
@@ -14,23 +15,29 @@ import com.example.usuario.tryww.R;
 public class ComentariosActivity extends Activity {
 	private ControladorComentarios controlador;
 	private EditText txtComentario;
-	private EditText txtPuntuacion;
+
 	private ListView lv;
+	private RatingBar ratingBarComentario;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_comentarios);
 		controlador = new ControladorComentarios(this);
+		this.ratingBarComentario = (RatingBar) super
+				.findViewById(R.id.ratingBar1);
+	
 		txtComentario = (EditText) findViewById(R.id.txtComentario);
-		txtPuntuacion = (EditText) findViewById(R.id.txtPuntuacion);
+
 		lv = (ListView) findViewById(R.id.listView1);
 		controlador.getComentarios();
 	}
 
 	public void comentar(View v) {
-		controlador.createComent(txtPuntuacion.getText().toString(),
-				txtComentario.getText().toString());
+		int x =(int) ratingBarComentario.getRating();
+		String puntuacion = Integer.toString(x);
+		controlador
+				.createComent(puntuacion, txtComentario.getText().toString());
 	}
 
 	@Override
@@ -57,13 +64,6 @@ public class ComentariosActivity extends Activity {
 		this.txtComentario = txtComentario;
 	}
 
-	public EditText getTxtPuntuacion() {
-		return txtPuntuacion;
-	}
-
-	public void setTxtPuntuacion(EditText txtPuntuacion) {
-		this.txtPuntuacion = txtPuntuacion;
-	}
 
 	public ListView getLv() {
 		return lv;

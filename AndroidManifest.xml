@@ -45,7 +45,7 @@
             android:value="@integer/google_play_services_version" />
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyCec67IYt-6AQ2YuT4vFgKNQm4j7zwlQa4" />
+            android:value="AIzaSyCsm_b4VDu_68gK7r4v2lpNwlq6p2CvRcs" />
 
         <activity
             android:name="co.gov.fna.okeda.presentacion.actividades.LoginActitvity"

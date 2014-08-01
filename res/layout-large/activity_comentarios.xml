@@ -27,36 +27,20 @@
             android:textSize="22dp" />
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="puntuacion"
-            android:textSize="22dp" />
-
-        <EditText
-            android:id="@+id/txtPuntuacion"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            android:inputType="numberSigned"
-            android:textSize="22dp" >
-
-            <requestFocus />
-        </EditText>
-    </LinearLayout>
+    <RatingBar
+        android:id="@+id/ratingBar1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:numStars="5"
+        android:rating="3" />
 
     <ImageView
         android:id="@+id/imageView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="comentar"
         android:layout_gravity="center"
+        android:onClick="comentar"
         android:src="@drawable/comments4" />
 
     <ListView

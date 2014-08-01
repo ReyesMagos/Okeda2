@@ -3,24 +3,24 @@ package co.gov.fna.okeda.controladores;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.R;
-import android.widget.Adapter;
-import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
+import android.view.View;
+import android.widget.AdapterView;
 import co.gov.fna.okeda.interfaces.impl.FactoryEntidades;
 import co.gov.fna.okeda.interfaces.impl.FactoryUsuario;
 import co.gov.fna.okeda.modelo.entidades.Entidades;
 import co.gov.fna.okeda.modelo.entidades.Usuario;
 import co.gov.fna.okeda.modelo.entidades.Vivienda;
 import co.gov.fna.okeda.presentacion.actividades.ComentariosActivity;
+import co.gov.fna.okeda.presentacion.actividades.adaptadores.Comentario;
+import co.gov.fna.okeda.presentacion.actividades.adaptadores.ComentarioAdapter;
 import co.gov.fna.okeda.utilidades.Utilities;
 
 import com.parse.FindCallback;
 import com.parse.GetCallback;
-import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
+import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
 public class ControladorComentarios {
@@ -28,10 +28,14 @@ public class ControladorComentarios {
 	private Utilities util;
 	private ComentariosActivity activity;
 	private List<String> listaComentarios;
+	private List<String> puntuations;
+	private List<Comentario> comentarios;
 
 	public ControladorComentarios(ComentariosActivity actividad) {
 		this.activity = actividad;
 		util = new Utilities(actividad);
+		puntuations = new ArrayList<String>();
+		comentarios = new ArrayList<Comentario>();
 
 	}
 
@@ -81,7 +85,10 @@ public class ControladorComentarios {
 			public void done(ParseException arg0) {
 				// TODO Auto-generated method stub
 				if (arg0 == null)
-					updatePromComentarios(v);
+					updatePromComentarios(vivienda, Puntuacion);
+				addToViviendaList(coment, Puntuacion, u.getUser().getUsername());
+				util.showAlertMessage("Comentario Enviado Correctamente",
+						"Exito");
 			}
 		};
 
@@ -97,21 +104,35 @@ public class ControladorComentarios {
 					comentario.put("usuario", u.getUser());
 					comentario.put("puntuacion", Puntuacion);
 					comentario.saveInBackground(comentarioSavedCallBack);
-					util.showAlertMessage("Comentario Enviado Correctamente",
-							"Exito");
+
 				}
 
 			}
 		};
 
-		vivienda.put("id", v.getPartitionKey());
+		vivienda.put("partitionKey", v.getPartitionKey());
 		vivienda.increment("numeroVisitas");
 		vivienda.increment("numeroComentarios");
 		vivienda.saveInBackground(viviendaSavedCallback);
 
 	}
 
-	public void updatePromComentarios(Vivienda v) {
+	public void updatePromComentarios(ParseObject v, String puntuacion) {
+		int numeroVisits = v.getInt("numeroVisitas");
+		int prom = v.getInt("puntuacionPromedio");
+		int promedio = 0;
+		if (numeroVisits != 0) {
+			for (String s : puntuations) {
+				promedio += Integer.parseInt(s);
+
+			}
+			if (promedio != 0) {
+
+				promedio = promedio / numeroVisits;
+				v.put("puntuacionPromedio", promedio);
+				v.saveInBackground();
+			}
+		}
 
 	}
 
@@ -142,12 +163,33 @@ public class ControladorComentarios {
 								// TODO Auto-generated method stub
 								if (vivienda != null) {
 									String partitionKey = vivienda
-											.getString("id");
+											.getString("partitionKey");
 									if (partitionKey != null) {
 										if (partitionKey.equals(v
 												.getPartitionKey())) {
-											addToViviendaList(p
-													.getString("mensaje"));
+											p.getParseObject("usuario")
+													.fetchIfNeededInBackground(
+															new GetCallback<ParseUser>() {
+
+																@Override
+																public void done(
+																		ParseUser usuer,
+																		ParseException arg1) {
+																	// TODO
+																	// Auto-generated
+																	// method
+																	// stub
+																	addToViviendaList(
+																			p.getString("mensaje"),
+																			p.getString("puntuacion"),
+																			usuer.getUsername());
+																}
+															});
+
+											String pipi = p
+													.getString("puntuacion");
+											if (pipi != null)
+												puntuations.add(pipi);
 
 										}
 									}
@@ -168,25 +210,36 @@ public class ControladorComentarios {
 
 	}
 
-	public void addToViviendaList(String p) {
-		if (listaComentarios == null) {
-			listaComentarios = new ArrayList<String>();
+	public void addToViviendaList(String mensaje, String puntuacion,
+			String username) {
+		if (comentarios == null) {
+			comentarios = new ArrayList<Comentario>();
 		}
-		listaComentarios.add(p);
+		Comentario c = new Comentario();
+		c.setComent(mensaje);
+		c.setPuntuacion(puntuacion);
+		c.setUsername(username);
+		comentarios.add(c);
 		showComentList();
 
 	}
 
 	public void showComentList() {
-		String x[] = new String[listaComentarios.size()];
-		int i = 0;
-		for (String s : listaComentarios) {
-			x[i] = s;
-			i++;
-		}
-		Adapter ada = new ArrayAdapter<String>(activity,
-				R.layout.simple_list_item_1, x);
-		activity.getLv().setAdapter((ListAdapter) ada);
+
+		ComentarioAdapter ada = new ComentarioAdapter(
+				activity.getApplicationContext(), comentarios);
+
+		activity.getLv().setAdapter(ada);
+		activity.getLv().setOnItemClickListener(
+				new android.widget.AdapterView.OnItemClickListener() {
+
+					@Override
+					public void onItemClick(AdapterView<?> arg0, View arg1,
+							int arg2, long arg3) {
+						// TODO Auto-generated method stub
+
+					}
+				});
 	}
 
 	public List<ParseObject> getListaObjetos() {
