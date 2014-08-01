@@ -1,16 +1,12 @@
 package com.example.usuario.tryww;
 
-import co.gov.fna.okeda.controladores.Comunicador;
+import co.gov.fna.okeda.interfaces.impl.FactoryUsuario;
 import co.gov.fna.okeda.modelo.entidades.Usuario;
 import android.app.Activity;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
-import android.os.Build;
 
 public class PerfilActivity extends Activity {
 
@@ -22,7 +18,8 @@ public class PerfilActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.user_perfil);
-		Usuario u = Comunicador.getUser();
+		FactoryUsuario factoryUsuario = FactoryUsuario.getInstance();
+		Usuario u = factoryUsuario.getCurrentUserInActivity();
 		txtEmail = (TextView) findViewById(R.id.txtEmail);
 		text_view_user_name = (TextView) findViewById(R.id.text_view_user_name);
 		txtMobile = (TextView) findViewById(R.id.txtMobile);

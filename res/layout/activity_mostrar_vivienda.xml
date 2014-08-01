@@ -18,7 +18,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="216dp" >
+            android:layout_height="match_parent" >
 
             <ImageView
                 android:id="@+id/flechaIzquierda1"
@@ -51,7 +51,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="300dp" >
+            android:layout_height="match_parent" >
 
             <ImageView
                 android:id="@+id/flechaIzquierda2"
@@ -84,13 +84,13 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="300dp" >
+            android:layout_height="match_parent" >
 
             <ImageView
                 android:id="@+id/flechaIzquierda3"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_gravity="center_horizontal"
+                android:layout_gravity="center"
                 android:layout_weight="1"
                 android:contentDescription="3"
                 android:onClick="MueveADerecha"
@@ -110,7 +110,7 @@
                 android:id="@+id/flechaDerecha3"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_gravity="center_horizontal"
+                android:layout_gravity="center"
                 android:layout_weight="1"
                 android:contentDescription="3"
                 android:onClick="mueveAIzquierda"
@@ -119,13 +119,13 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="300dp" >
+            android:layout_height="match_parent" >
 
             <ImageView
                 android:id="@+id/flechaIzquierda4"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_gravity="center_horizontal"
+                android:layout_gravity="center"
                 android:layout_weight="1"
                 android:contentDescription="3"
                 android:onClick="MueveADerecha"
@@ -145,7 +145,7 @@
                 android:id="@+id/flechaDerecha4"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_gravity="center_horizontal"
+                android:layout_gravity="center"
                 android:layout_weight="1"
                 android:contentDescription="3"
                 android:onClick="mueveAIzquierda"
@@ -154,13 +154,13 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="300dp" >
+            android:layout_height="match_parent" >
 
             <ImageView
                 android:id="@+id/flechaIzquierda5"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_gravity="center_horizontal"
+                android:layout_gravity="center"
                 android:layout_weight="1"
                 android:contentDescription="3"
                 android:onClick="MueveADerecha"
@@ -180,7 +180,7 @@
                 android:id="@+id/flechaDerecha5"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_gravity="center_horizontal"
+                android:layout_gravity="center"
                 android:layout_weight="1"
                 android:contentDescription="3"
                 android:onClick="mueveAIzquierda"
@@ -189,13 +189,13 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="300dp" >
+            android:layout_height="match_parent" >
 
             <ImageView
                 android:id="@+id/flechaIzquierda6"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_gravity="center_horizontal"
+                android:layout_gravity="center"
                 android:layout_weight="1"
                 android:contentDescription="3"
                 android:onClick="MueveADerecha"

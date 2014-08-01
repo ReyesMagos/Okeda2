@@ -1,11 +1,6 @@
 package co.gov.fna.okeda.controladores;
 
-
-
-
 import java.util.List;
-
-
 
 import com.parse.ParseException;
 import com.parse.ParseObject;
@@ -23,9 +18,9 @@ public class ParseServices extends AsyncTask<String, Integer, Boolean> {
 	boolean vacio;
 	ControladorComentarios controlador;
 
-	public ParseServices(String nombreObjeto,ControladorComentarios controlador) {
+	public ParseServices(String nombreObjeto, ControladorComentarios controlador) {
 		this.nombreObjeto = nombreObjeto;
-		this.controlador= controlador;
+		this.controlador = controlador;
 	}
 
 	@Override
@@ -37,7 +32,7 @@ public class ParseServices extends AsyncTask<String, Integer, Boolean> {
 		try {
 			ob = query.find();
 			if (ob.size() == 0) {
-				
+				vacio = true;
 				return false;
 			}
 
@@ -61,10 +56,14 @@ public class ParseServices extends AsyncTask<String, Integer, Boolean> {
 		if (result) {
 			controlador.setListaObjetos(ob);
 			controlador.MuestraComentarios();
-			
+
 		} else {
-			
-			controlador.getUtil().showAlertMessage("Error", "Error Al obtener Los Comentarios");
+			if (!vacio)
+				controlador.getUtil().showAlertMessage("Error",
+						"Error Al obtener Los Comentarios");
+			else
+				controlador.getUtil().showAlertMessage("Alerta",
+						"Sin Comentarios");
 		}
 		controlador.cancelDialog();
 	}

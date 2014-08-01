@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.example.usuario.tryww.R;
 
+import co.gov.fna.okeda.interfaces.impl.FactoryEntidades;
 import co.gov.fna.okeda.interfaces.impl.FactoryVivienda;
 import co.gov.fna.okeda.modelo.entidades.Entidades;
 import co.gov.fna.okeda.modelo.entidades.Vivienda;
@@ -56,15 +57,19 @@ public class ControladorBusquedaVivienda {
 
 				@Override
 				public void onClick(DialogInterface arg0, int arg1) {
-		
+
 					ControladorMostrarVivienda controladorMoestrMostrarVivienda = ControladorMostrarVivienda
 							.getInstace();
 					controladorMoestrMostrarVivienda
 							.setVivienda((Vivienda) listaViviendasEncontradas
 									.get(arg1));
 					activity.showVivienda();
-					Comunicador.setEntidad((Vivienda) listaViviendasEncontradas
+					FactoryEntidades factoryEntidades = FactoryEntidades
+							.getInstance();
+					factoryEntidades
+							.setEntidadInCurrentActivity(listaViviendasEncontradas
 									.get(arg1));
+
 				}
 			});
 			builderSingle.show();
@@ -313,13 +318,11 @@ public class ControladorBusquedaVivienda {
 			searchByPrecioDesde(precioDesdeSeleccionado);
 		} else if (precioHastaSeleccionado != null) {
 			searchByPrecioHasta(precioHastaSeleccionado);
-		}
-		else{
+		} else {
 			Utilities utilities = new Utilities(activity);
 			utilities.showAlertMessage(
 					"Error Parametros de Busqueda Vacios o Invalidos", "Error");
 		}
-		
 
 	}
 

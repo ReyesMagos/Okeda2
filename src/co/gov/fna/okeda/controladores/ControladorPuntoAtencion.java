@@ -9,6 +9,7 @@ import com.example.usuario.tryww.R;
 import android.app.Activity;
 import android.util.Log;
 import android.widget.Toast;
+import co.gov.fna.okeda.interfaces.impl.FactoryEntidades;
 import co.gov.fna.okeda.interfaces.impl.FactoryPuntoAtencion;
 import co.gov.fna.okeda.interfaces.impl.FactoryVivienda;
 import co.gov.fna.okeda.modelo.entidades.PuntoAtencion;
@@ -20,7 +21,7 @@ import co.gov.fna.okeda.servicios.GetRestServices;
  * Created by Alexis-PC on 19/07/2014.
  */
 public class ControladorPuntoAtencion {
-	
+
 	private String[] urlSet;
 	private static ControladorPuntoAtencion instance;
 	private PuntoAtencion puntoEscogido;
@@ -32,29 +33,31 @@ public class ControladorPuntoAtencion {
 		}
 		return instance;
 	}
-	
-	public void setPuntoEscogido(PuntoAtencion punto){
+
+	public void setPuntoEscogido(PuntoAtencion punto) {
 		this.puntoEscogido = punto;
 	}
 
-    public void showPunto(){
-        
-        if(puntoEscogido == null) return;
+	public void showPunto() {
 
-        this.activity.txt0.setText(puntoEscogido.getTipoEntidad());
-        this.activity.txt1.setText(puntoEscogido.getDepartamento());
-        this.activity.txt2.setText(puntoEscogido.getMunicipioCiudad());
-        this.activity.txt3.setText(puntoEscogido.getDireccion());
-        this.activity.txt4.setText(puntoEscogido.getHorarioAtencion());
-        this.activity.txt5.setText(puntoEscogido.getHorarioExtendido());
-        this.activity.txt6.setText(puntoEscogido.getTipoServicioOfrecido());
-        this.activity.txt7.setText(puntoEscogido.getCostoTransaccion());
+		if (puntoEscogido == null)
+			return;
+		FactoryEntidades factoryEntidades = FactoryEntidades.getInstance();
+		factoryEntidades.setEntidadInCurrentActivity(puntoEscogido);
+		this.activity.txt0.setText(puntoEscogido.getTipoEntidad());
+		this.activity.txt1.setText(puntoEscogido.getDepartamento());
+		this.activity.txt2.setText(puntoEscogido.getMunicipioCiudad());
+		this.activity.txt3.setText(puntoEscogido.getDireccion());
+		this.activity.txt4.setText(puntoEscogido.getHorarioAtencion());
+		this.activity.txt5.setText(puntoEscogido.getHorarioExtendido());
+		this.activity.txt6.setText(puntoEscogido.getTipoServicioOfrecido());
+		this.activity.txt7.setText(puntoEscogido.getCostoTransaccion());
 
-    }
-    
-    public void setActivity(PuntoAtencionActivity acti){
-    	this.activity = acti;
-    }
+	}
+
+	public void setActivity(PuntoAtencionActivity acti) {
+		this.activity = acti;
+	}
 
 	public String[] getUrlSet() {
 		return urlSet;
@@ -79,6 +82,5 @@ public class ControladorPuntoAtencion {
 	public PuntoAtencionActivity getActivity() {
 		return activity;
 	}
-    
-    
+
 }

@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import com.example.usuario.tryww.Mapas;
 import com.example.usuario.tryww.R;
 
 import co.gov.fna.okeda.controladores.ControladorPuntoAtencion;
@@ -32,7 +33,7 @@ public class PuntoAtencionActivity extends Activity {
 		setContentView(R.layout.activity_punto_atencion);
 		createComponents();
 		controlador = ControladorPuntoAtencion.getInstace();
-		controlador.setActivity(this) ;
+		controlador.setActivity(this);
 		controlador.showPunto();
 	}
 
@@ -46,14 +47,19 @@ public class PuntoAtencionActivity extends Activity {
 		this.txt6 = (TextView) findViewById(R.id.textView6);
 		this.txt7 = (TextView) findViewById(R.id.textView7);
 	}
-	
-	public void street(View v){
-		double x =controlador.getPuntoEscogido().getUbicacion().getLatitud();
-		double y=controlador.getPuntoEscogido().getUbicacion().getLonguitud();
-		Uri streetViewUri = Uri.parse(
-                "google.streetview:cbll=" + x+","+y + "&cbp=1,90,,0,1.0&mz=20");
-        Intent streetViewIntent = new Intent(Intent.ACTION_VIEW, streetViewUri);
-        startActivity(streetViewIntent);//
+
+	public void street(View v) {
+		double x = controlador.getPuntoEscogido().getUbicacion().getLatitud();
+		double y = controlador.getPuntoEscogido().getUbicacion().getLonguitud();
+		Uri streetViewUri = Uri.parse("google.streetview:cbll=" + x + "," + y
+				+ "&cbp=1,90,,0,1.0&mz=20");
+		Intent streetViewIntent = new Intent(Intent.ACTION_VIEW, streetViewUri);
+		startActivity(streetViewIntent);//
+	}
+
+	public void goToMapActivity(View v) {
+		Intent i = new Intent(this, Mapas.class);
+		startActivity(i);
 	}
 
 	@Override
@@ -74,8 +80,8 @@ public class PuntoAtencionActivity extends Activity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
-	
-	public void getServices(View v){
+
+	public void getServices(View v) {
 		Log.d("C PuntoAten", "Entre a services");
 	}
 }
