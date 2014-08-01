@@ -3,7 +3,8 @@ package co.gov.fna.okeda.presentacion.actividades;
 import co.gov.fna.okeda.controladores.ControladorComentarios;
 import co.gov.fna.okeda.controladores.ControladorMostrarVivienda;
 
-import com.example.usuario.tryww.MapasAc;
+
+import com.example.usuario.tryww.Mapas;
 import com.example.usuario.tryww.R;
 import com.example.usuario.tryww.R.id;
 import com.example.usuario.tryww.R.layout;
