@@ -1,19 +1,22 @@
 package co.gov.fna.okeda.presentacion.actividades.Dashboard;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.GridLayout;
 import android.widget.GridView;
-
-import com.example.usuario.tryww.*;
-
 import co.gov.fna.okeda.controladores.ControladorDashBoard;
 import co.gov.fna.okeda.presentacion.actividades.BusquedaPuntoAtencionActivity;
 import co.gov.fna.okeda.presentacion.actividades.BusquedaViviendas;
+
+import com.example.usuario.tryww.CreditoActivity;
+import com.example.usuario.tryww.PerfilActivity;
+import com.example.usuario.tryww.R;
 
 public class DashBoard extends Activity {
 
@@ -34,7 +37,7 @@ public class DashBoard extends Activity {
 		Intent i = new Intent(this, BusquedaViviendas.class);
 		startActivity(i);
 	}
-	
+
 	public void changeToBusquedaPuntoAtencionActivity() {
 		Intent myItent = new Intent(this, BusquedaPuntoAtencionActivity.class);
 		startActivity(myItent);
@@ -47,13 +50,13 @@ public class DashBoard extends Activity {
 	public void setGridOpciones(GridView gridOpciones) {
 		this.gridOpciones = gridOpciones;
 	}
-	
-	public void changeToPerfilActivity(){
+
+	public void changeToPerfilActivity() {
 		Intent myItent = new Intent(this, PerfilActivity.class);
 		startActivity(myItent);
 	}
-	
-	public void changeToCreditoActivity(){
+
+	public void changeToCreditoActivity() {
 		Intent myItent = new Intent(this, CreditoActivity.class);
 		startActivity(myItent);
 	}
@@ -75,5 +78,37 @@ public class DashBoard extends Activity {
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		if (keyCode == KeyEvent.KEYCODE_BACK) {
+			AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+			alertDialog
+					.setMessage(
+							"¿Está seguro que desea salir de la aplicación?")
+					.setTitle("Alerta").setCancelable(false);
+			alertDialog.setPositiveButton("Salir", new OnClickListener() {
+
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					System.exit(1);
+
+				}
+			});
+			alertDialog.setNegativeButton("Cancelar", new OnClickListener() {
+
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+
+				}
+			});
+
+			AlertDialog alertDialog2 = alertDialog.create();
+
+			alertDialog2.show();
+		}
+
+		return super.onKeyDown(keyCode, event);
 	}
 }

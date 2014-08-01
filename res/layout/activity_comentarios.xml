@@ -23,8 +23,8 @@
             android:layout_height="wrap_content"
             android:ems="10" />
     </LinearLayout>
-    
-       <LinearLayout
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
 
@@ -34,25 +34,23 @@
             android:layout_height="wrap_content"
             android:text="puntuacion" />
 
-        <EditText
-            android:id="@+id/txtPuntuacion"
+        <RatingBar
+            android:id="@+id/ratingBar1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            android:inputType="numberSigned" >
+            android:layout_weight="0.5" />
 
-            <requestFocus />
-        </EditText>
+        <requestFocus />
 
-        </LinearLayout>
+      
+    </LinearLayout>
 
-       <ImageView
-           android:id="@+id/imageView1"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:onClick="comentar"
-           android:src="@drawable/ic_launcher" />
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="comentar"
+        android:src="@drawable/ic_launcher" />
 
     <ListView
         android:id="@+id/listView1"

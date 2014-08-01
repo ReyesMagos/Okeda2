@@ -1,5 +1,12 @@
 package co.gov.fna.okeda.controladores;
 
+import java.util.List;
+
+import com.parse.FindCallback;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
+
 import android.app.Activity;
 import android.graphics.Bitmap;
 import co.gov.fna.okeda.interfaces.impl.FactoryEntidades;
@@ -58,11 +65,41 @@ public class ControladorMostrarVivienda {
 		}
 	}
 
+	public void findRating(Vivienda v) {
+		ParseQuery<ParseObject> query = ParseQuery.getQuery("vivienda");
+		query.whereEqualTo("partitionKey", v.getPartitionKey());
+		query.findInBackground(new FindCallback<ParseObject>() {
+			public void done(List<ParseObject> scoreList, ParseException e) {
+				if (e == null) {
+					if (!scoreList.isEmpty())
+						setRating(scoreList.get(0));
+
+				} else {
+
+				}
+			}
+		});
+
+	}
+
+	public void setRating(ParseObject p) {
+		int x = p.getInt("puntuacionPromedio");
+		if (x!=0) {
+			float i = (float)x;
+			this.getActividad().getRating().setRating(i);
+		} else {
+			float i = 3;
+			this.getActividad().getRating().setRating(i);
+		}
+	}
+
 	public void showViviendaInformation() {
 		FactoryEntidades factoryEntidades = FactoryEntidades.getInstance();
 		Entidades e = factoryEntidades.getEntidadInCurrentActivity();
 		if (e instanceof Vivienda) {
 
+			// this.actividad.getRating().setRating(rating)
+			findRating(vivienda);
 			this.actividad.getTxtNombreProyecto().setText(
 					"Nombre Proyecto: " + vivienda.getNombreProyecto());
 			this.actividad.getTxtClaseDeVivienda().setText(
