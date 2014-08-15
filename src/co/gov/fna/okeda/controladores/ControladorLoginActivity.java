@@ -1,5 +1,6 @@
 package co.gov.fna.okeda.controladores;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.json.JSONArray;
@@ -34,6 +35,7 @@ public class ControladorLoginActivity {
 	private String[] urlSet;
 	private Usuario usuario;
 	private ViviendaProcessImpl viviendaProcessImpl;
+	FactoryVivienda factory;
 
 	public ControladorLoginActivity(LoginActitvity actividad) {
 		this.activity = actividad;
@@ -47,7 +49,7 @@ public class ControladorLoginActivity {
 			String[] viviendaPropertysNames = activity.getResources()
 					.getStringArray(R.array.viviendas_properties_names);
 			JSONArray arregloJSON = objeto.getJSONArray("d");
-			FactoryVivienda factory = FactoryVivienda.getInstance();
+			factory = FactoryVivienda.getInstance();
 			factory.fillViviendas(arregloJSON, viviendaPropertysNames);
 			this.saveViviendaIntoDatabase(factory.getListaViviendas());
 			this.activity.changeToActivy(DashBoard.class);
@@ -119,7 +121,20 @@ public class ControladorLoginActivity {
 							.getInstance();
 					factoryUsuario.createUser(user);
 					getActivity().saveSharedPreference(username, pass);
-					getRestFullServices();
+
+					viviendaProcessImpl = new ViviendaProcessImpl(activity
+							.getApplicationContext());
+					List<Vivienda> viviendasList = viviendaProcessImpl
+							.findAllViviendas();
+					// FIXME: llamado al WS categorias
+					if (viviendasList.size() == 0) {
+						getRestFullServices();
+					} else {
+						factory = FactoryVivienda.getInstance();
+						factory.setListaViviendas(new ArrayList<Entidades>(
+								viviendasList));
+						activity.changeToActivy(DashBoard.class);
+					}
 				} else {
 					utilidades.showAlertMessage(getActivity().getResources()
 							.getString(R.string.error_datos), getActivity()

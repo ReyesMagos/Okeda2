@@ -37,7 +37,7 @@ public class ViviendaProcessImpl implements IViviendaProcess {
 
 	@Override
 	public List<Vivienda> findAllViviendas() {
- 
+
 		try {
 			List<ContentValues> contentValuesList = this.viviendaDAOImpl
 					.findAll(Boolean.FALSE, ViviendaContract.TABLE_NAME,
@@ -46,14 +46,14 @@ public class ViviendaProcessImpl implements IViviendaProcess {
 			List<Vivienda> viviendaslList = new ArrayList<Vivienda>();
 
 			for (ContentValues contentValues : contentValuesList) {
-				viviendaslList.add(this
-						.convertContentValueToVivienda(contentValues));
+				viviendaslList
+						.add(convertContentValueToVivienda(contentValues));
 			}
-			
+
 			return viviendaslList;
 		} catch (Exception e) {
 			e.printStackTrace();
-			return null; 
+			return null;
 		}
 
 	}
@@ -211,18 +211,18 @@ public class ViviendaProcessImpl implements IViviendaProcess {
 		vivienda.setHoraDeAtencionHasta(contentValues
 				.getAsString(ViviendaContract.Column.HORA_DE_ATENCION_HASTA));
 		List<String> urlImagenes = new ArrayList<String>();
-		urlImagenes.set(0, contentValues
+		urlImagenes.add(contentValues
 				.getAsString(ViviendaContract.Column.IMAGEN_PRINCIPAL));
-		urlImagenes.set(1,
-				contentValues.getAsString(ViviendaContract.Column.IMAGEN1));
-		urlImagenes.set(2,
-				contentValues.getAsString(ViviendaContract.Column.IMAGEN2));
-		urlImagenes.set(3,
-				contentValues.getAsString(ViviendaContract.Column.IMAGEN3));
-		urlImagenes.set(4,
-				contentValues.getAsString(ViviendaContract.Column.IMAGEN4));
-		urlImagenes.set(5,
-				contentValues.getAsString(ViviendaContract.Column.IMAGEN5));
+		urlImagenes.add(contentValues
+				.getAsString(ViviendaContract.Column.IMAGEN1));
+		urlImagenes.add(contentValues
+				.getAsString(ViviendaContract.Column.IMAGEN2));
+		urlImagenes.add(contentValues
+				.getAsString(ViviendaContract.Column.IMAGEN3));
+		urlImagenes.add(contentValues
+				.getAsString(ViviendaContract.Column.IMAGEN4));
+		urlImagenes.add(contentValues
+				.getAsString(ViviendaContract.Column.IMAGEN5));
 		vivienda.setUrlImagenes(urlImagenes);
 		vivienda.setLocalidadoZona(contentValues
 				.getAsString(ViviendaContract.Column.LOCALIDAD_O_ZONA));
@@ -250,7 +250,7 @@ public class ViviendaProcessImpl implements IViviendaProcess {
 				.getAsString(ViviendaContract.Column.TELEFONO_FIJO_SALA_DE_VENTAS));
 		vivienda.setTipoInmuebleOfrecido(contentValues
 				.getAsString(ViviendaContract.Column.TIPO_DE_INMUEBLE_OFRECIDO));
-		Ubicacion ubicacion = null;
+		Ubicacion ubicacion = new Ubicacion(0.0, 0.0);
 		ubicacion.setLatitud(contentValues
 				.getAsDouble(ViviendaContract.Column.LATITUD));
 		ubicacion.setLonguitud(contentValues
